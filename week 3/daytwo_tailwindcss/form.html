@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.css" rel="stylesheet" />
+
+  </head>
+  <body>
+    
+    <div class="container mx-auto border grid grid-cols-1 lg:grid-cols-2 gap-5 p-5 items-center bg-sky-50 ">
+      <!-- form row -->
+      <div class=" ">
+          <img src="images/class.jpg" alt="class room" class="4/5">
+
+      </div>
+      <div class=" p-5 ">
+        <h2 class="text-center text-2xl text-sky-950 bg-sky-100 "> Register Now</h2>
+          <form method="post" action="index.html" class=" p-3 my-3 shadow-xl">
+            
+            <div class="my-3">
+              <label>Full Name :</label>
+              <input type="text" name="fullname" placeholder="Enter your fullname" required class="w-full rounded-md border-0 border-b-2 bg-sky-300 focus:bg-sky-400 hover:bg-sky-200">
+            </div>
+
+            <div class="my-3">
+              <label>E-mail :</label>
+              <input type="email" name="email" placeholder="Enter your email" required class="w-full rounded-md border-0 border-b-2 bg-sky-300 focus:bg-sky-400 hover:bg-sky-200">
+            </div>
+            <div class="my-3">
+              <label>Phone Number :</label>
+              <input type="text" name="phone" placeholder="Enter your phone number" required class="w-full rounded-md border-0 border-b-2 bg-sky-300 focus:bg-sky-400 hover:bg-sky-200">
+            </div>
+            <button class="bg-sky-700 text-white px-4 py-1 rounded-lg hover:bg-green-400 transition duration-700 "> Register </button>
+
+          </form>
+      </div>
+
+          <div class="border p-5">
+            
+              <table class="w-full text-sm text-left divide-y divide-sky-950">
+                <thead class=" text-sm text-body bg-sky-200 border-b rounded-base border-default">
+                  <tr>
+                    <th class="px-4 py-3 font-semibold text-xs uppercase text-gray-500" > Serial No.</th>
+                    <th class="px-4 py-3 font-semibold text-xs uppercase tracking-wider  text-gray-500">Full Name</th>
+                    <th class="px-4 py-3 font-semibold text-xs uppercase tracking-wider text-gray-500">Email</th>
+                    <th class="px-4 py-3 font-semibold text-xs uppercase tracking-wider text-gray-500">Phone</th>
+                  </tr>
+
+                </thead>
+                <tbody class="border">
+                  <tr class="bg-gray-50 hover:bg-gray-100">
+                    <td class="px-4 py-3 font-medium text-gray-900">1</td>
+                    <td class="px-4 py-3 font-medium text-gray-900">Johnwick Baboyega</td>
+                    <td class="px-4 py-3 font-medium text-gray-900">Johnwick@gmail.com</td>
+                    <td class="px-4 py-3 font-medium text-gray-900">09020331780</td>
+                  </tr>
+
+                  <tr>
+                    <td >2</td>
+                    <td> Jackie Chan</td>
+                    <td>Jackiechan@gmail.com</td>
+                    <td>09030331780</td>
+                  </tr>
+
+                  <tr>
+                    <td>3</td>
+                    <td>John Okafor</td>
+                    <td>Johokafor@gmail.com</td>
+                    <td>08020331780</td>
+                  </tr>
+
+                  <tr>
+                    <td>4</td>
+                    <td>Chris Brown</td>
+                    <td>chrisbrown@gmail.com</td>
+                    <td>07070331780</td>
+                  </tr>
+
+                </tbody>
+
+              </table>
+
+          </div>
+
+
+    </div>
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
+
+  </body>
+</html>

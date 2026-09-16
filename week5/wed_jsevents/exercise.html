@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise </title>
+
+    <style>
+        #showroom{
+            width: 50%;
+            height: 200px;
+            border: 1px solid red;
+        }
+
+        .myblue {
+            background-color: lightblue;
+        }
+        
+
+    </style>
+</head>
+<body>
+    <div id="showroom">  </div>
+
+
+
+    <script>
+
+        let show = document.getElementById('showroom');
+        show.addEventListener('mouseover', function( ){
+           // show.style.backgroundColor = 'lightblue'; //using inline style
+          // show.classList.add('myblue');        //using css style
+          //above line 32 can be rewritten as
+           this.classList.add('myblue');    //"this" is used to refer to the element with the handler
+        })
+
+        show.addEventListener('mouseout', function( ){
+            show.classList.remove('myblue')
+        } )
+    </script>
+    
+</body>
+</html>

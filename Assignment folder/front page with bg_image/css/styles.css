@@ -1,0 +1,106 @@
+div.maincontainer {
+	background-color:pink;
+	min-height:700px;
+	
+	background-image: linear-gradient(rgba(0,0,0,0.7)),url(../images/banner.jpg);
+	align-content:center;
+
+
+}
+.navbar {
+	margin-buttom: 30px;
+	min-height: 100px
+	text-align:center;
+	justify-content:center;
+	color: #fff;
+}
+div.navbar{
+	display:flex;
+	align-items:center;
+	justify-content:space-between;
+}
+.mainbox{
+	
+	min-height:500px;
+}
+div.mainbox{
+	display:flex;
+	align-items:center;
+	justify-content:space-between;
+}
+#logoarea{
+	
+	min-height:100px;
+	width:10%;
+}
+#linkarea {
+	border: 1px solid white;
+	min-height:100px;
+	width:60%;
+	display:flex;
+	justify-content:space-between;
+	align-items:center;
+	margin:10px;
+}
+#linkarea a{
+	color:#fff;
+	text-decoration:none;
+
+}
+
+}
+#linkarea div a{
+	align-items:center;
+	align-content:center;
+	display:flex;
+	
+}
+#textarea{
+	
+	min-height:400px;
+	width:50%;
+	text-align:center;
+	color: #fff;
+	font-family:Arial, sans-serif;
+	font-size:20px;
+}
+#textarea button{
+	width:150px;
+	height:50px;
+	background-color:inherit;
+	border: 1px white solid;
+	color:#fff;
+}
+#formpart{
+	margin-right: 200px;
+	min-height:400px;
+	padding:30px;
+	background-color:white;
+	text-align:center;
+
+}
+#formpart span{
+	color:pink;
+}
+#gets{
+	width:320px;
+	color: #fff;
+}
+#formpart div h1{
+	align-content:center;
+	justify-content:center;
+	
+}
+.navbar img{
+	width:100px;
+	height:50px;
+}
+#gets {
+	background-color:pink;
+	border:none;
+	font-size:25px
+}
+#formpart input{
+	height:50px;
+	width:320px;
+}

@@ -1,0 +1,20 @@
+1. SELECT * FROM customers WHERE cust_fname LIKE '%a%' OR cust_lname LIKE '%a%' ;
+
+2. SELECT * FROM customers WHERE cust_id != '1' AND cust_id != '4';
+
+3. SELECT * FROM customers WHERE cust_fname = 'Tola' AND cust_lname= 'Oni' AND cust_city= 'Ondo';
+
+4. SELECT * FROM customers WHERE cust_phone LIKE '0803%';
+
+5. SELECT order_id, order_amt, order_date FROM customer_orders WHERE order_customerid = '1' ORDER BY order_amt Desc;
+
+
+
+
+Que Second Part
+
+1.  SELECT order_date, order_amt FROM customer_orders ORDER BY order_amt Desc;
+
+2. SELECT order_id, order_amt, order_date FROM customer_orders WHERE order_customerid = '1' ORDER BY order_amt Desc;
+
+3. SELECT * FROM customer_orders WHERE order_date BETWEEN '2017-03-01' AND '2017-03-31' ORDER BY order_amt DESC;

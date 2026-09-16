@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>js Object</title>
+</head>
+<body>
+    
+    <h1>Examples done in the class </h1>
+
+    <script>
+
+        //a bank account example
+   /*     const account = {
+            accountName : "John Smith",
+            accountNumber : '212334543',
+            balance : 35000,
+            deposit (amount){
+                this.balance += amount;
+            },
+            withdraw (amount ){
+                if ( amount < this.balance){
+                    this.balance -= amount; 
+                }
+                else{
+                    console.log(` insufficient balance`); 
+                }
+                
+            },
+            checkBalance(){
+                console.log(`${account.accountName} Your balance is: ${this.balance} `);
+            }
+        }
+
+        account.checkBalance();
+        account.deposit(20000);
+        account.checkBalance();
+        account.withdraw(70000);
+        account.checkBalance();
+*/
+
+        
+      const student = {
+             name : "John" ,
+             age : 21 ,
+             course : "Computer Science",
+             level : 300
+        }
+        /*
+        
+        //old way of getting object value
+        // let myName = student.name;
+        // let myAge = student.age;
+        
+        //modern way -- object destructing
+        let {name, age, course, level} = student;
+        console.log(name);
+        console.log(age);
+        console.log(course);
+        console.log(level);
+        */
+
+
+        // function getStudentInfo (stud) {
+        //     console.log(`
+        //     Your name is ${stud.name}
+        //     Your age is ${stud.age}
+        //     Your course is ${stud.course} `);
+            
+        // }
+
+        //using destructuring to get parameter for function
+       /*  function getStudentInfo ({name, age, course}) {
+            console.log(`
+            Your name is ${name}
+            Your age is ${age}
+            Your course is ${course} `);
+            
+        }   
+
+        getStudentInfo(student);
+        */
+
+       // const fruits = ['mango', 'Banana', 'Apple'];
+       // console.log(fruits);
+        
+
+        
+        
+        
+
+
+    </script>
+</body>
+</html>

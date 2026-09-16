@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 2 </title>
+
+    <style>
+        .products{
+            display: flex;
+            justify-content: space-around;
+        }
+        .product{
+            border: solid 1px red;
+            width: 40%;
+            padding: 20px;
+        }
+        .colr{
+            background-color: cadetblue;
+            padding: 30px;
+            height: 100px;
+            color:white;
+            box-shadow: rgba(0,0,0,0.24) 0px 3px 8px;
+            transition: 1s all ease-in-out;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="products">
+        <div id="product1" class="product">
+            <p>Product Name: Laptop</p>
+            <p id="detail">  </p>
+            <p>Price: 200000</p>
+            <button> View Product  </button>
+        </div>
+
+        <div id="product2" class="product">
+            <p>Product Name: Iphone</p>
+            <p id="detail">  </p>
+            <p>Price: 15000</p>
+            <button> View Product </button>
+        </div>
+
+    </div>
+
+
+
+    <script>
+        let detail = document.getElementById('detail')
+        let prod1 = document.getElementById('product1');
+        let prod2 = document.getElementById('product2')
+
+        prod1.addEventListener('mouseover', function(){
+            this.classList.add('colr')
+            detail.textContent= 'This is a hp laptop with good battery abd screen display'
+        })
+        prod1.addEventListener('mouseout', function(){
+            this.classList.remove('colr');
+            detail.textContent= ' ';
+        } )
+
+         prod2.addEventListener('mouseover', function(){
+            this.classList.add('colr')
+        })
+        prod2.addEventListener('mouseout', function(){
+            this.classList.remove('colr')
+        } )
+
+       
+
+       
+
+
+        
+
+    </script>
+    
+</body>
+</html>

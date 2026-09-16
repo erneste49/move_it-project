@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image swap </title>
+
+    <style>
+        .image_container {
+            width: 50%;
+            max-height: 200px;
+            margin-top: 30px;
+        }
+        img{
+            max-width: 100%;
+            height: 600px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+
+    <p > You typed: <span id="show"></span>  </p>
+    <input type="text" name="msg" id="msg">
+
+    <div class="image_container">
+        <img src="img1.jpg" alt="nice wallpaper" id="myimg">
+    </div>
+    
+
+    <script>
+        let display = document.getElementById('show')
+        let content = document.getElementById('msg')
+
+        let myimg = document.getElementById('myimg');
+
+        
+
+        content.addEventListener('keyup', function(){
+            let contentValue = content.value.toUpperCase();   //to convert text to upper case --> .toUpperCase()
+            display.textContent = contentValue 
+        })
+
+        myimg.addEventListener('mouseover', function(){
+            this.src='img2.jpg'
+        })
+        myimg.addEventListener('mouseout', function(){
+            this.src='img1.jpg'
+        })
+
+
+    </script>
+</body>
+</html>

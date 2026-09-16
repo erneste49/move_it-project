@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> E-commerce website </title>
+
+    <style>
+        div{
+          
+            min-height: 200px;
+            padding: 20px;
+        }
+        #product_list{
+            /* display: flex;
+            justify-content: space-between;
+            flex-grow: inherit; */
+        }
+        button{
+            background-color: green;
+            color: white;
+            height: 40px;
+        }
+        .shopping_cart{
+            background-color: ghostwhite;
+        }
+        #selectedprod{
+            color:rgb(8, 8, 8);
+            font-weight: 200;
+            font-size: 20px;
+        }
+        .container{
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!--start of cart area-->
+        <div class="shopping_cart">
+            <h2>Cart Area </h2>
+            <div id="cart_list"><h3>Total Item in Cart: <span id="cart_count"> </span></h3> 
+                <div id="selectedprod"> </div>
+            </div>
+            <div class="ctotal"> <h3>Cart total Cost: <span id="cart_total"> </span> </h3> </div>
+
+
+        </div>
+         <!--end of cart area-->
+
+          <!--start of product area-->
+        <div class="product_area">
+            <h2> Products Area </h2>
+            <div id="product_list"> </div>
+        </div>
+         <!--end of product area-->
+    </div>
+    
+    <script>
+
+        //list of products to be displayed
+        const products = [
+            {
+                id: 1,
+                name: 'Exercise Book (1 dozen)',
+                price: 7000
+            },
+            {
+                id: 2,
+                name: 'Back pack',
+                price: 12000
+            },
+            {
+                id: 3,
+                name: 'Mathematical set',
+                price: 3500
+            },
+            {
+                id: 4,
+                name: 'Pen & Pencil (4 pcs)',
+                price: 1500
+            },
+            {
+                id: 5,
+                name: 'Lunch Box',
+                price: 6000
+            },
+            {
+                id: 6,
+                name: 'Socks',
+                price: 2000
+            },
+
+        ];
+
+        let cart = [];
+        let number = 0;
+        let cAmount = 0;
+            //selecting elements from body part using id's
+        let productList = document.getElementById('product_list');
+        let cartList = document.getElementById('cart_list');
+        let cartCount = document.getElementById('cart_count');
+        let cartTotal = document.getElementById('cart_total');
+        let selectedCart = document.getElementById('selectedprod');
+        let cartCost = document.querySelector('.ctotal')
+        
+
+      
+
+        function productDisplayer (){
+            productList.innerHTML = "";
+            products.forEach(function(prod){
+                let prodTag = document.createElement('div');
+                let prodId = document.createElement('p');
+                prodId.textContent = prod.id;
+                let prodName = document.createElement('h4');
+                prodName.textContent = prod.name;
+                let prodPrice = document.createElement('p');
+                prodPrice.textContent = prod.price;
+                let prodButton = document.createElement('button');
+                prodButton.textContent = 'Add to Cart';
+
+                  prodTag.appendChild(prodName);
+                prodTag.appendChild(prodPrice);
+
+            prodButton.addEventListener('click', function(){
+            
+               cart.push('<p>' + prod.name, prod.price + '</p>' )
+                selectedCart.innerHTML = cart;
+                        number++
+                        cartCount.textContent=number;
+                        let firstPrice = prod.price
+                        cartTotal.textContent= firstPrice ;
+            });
+               //prodTag.appendChild(prodId);
+                prodTag.appendChild(prodName);
+                prodTag.appendChild(prodPrice);
+                prodTag.appendChild(prodButton);
+                productList.appendChild(prodTag);
+            })
+            }
+
+            function totalCal(p){
+
+           let amount=products.price ;
+            total = amount + p
+            return total + amount
+            }
+   
+           
+           
+         
+
+
+       
+       
+        
+          productDisplayer()
+
+
+
+    </script>
+</body>
+</html>

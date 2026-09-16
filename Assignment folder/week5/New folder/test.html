@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Todo List</title>
+  <style>
+    body { font-family: Arial; max-width: 400px; margin: 50px auto; }
+    input, button { padding: 8px; font-size: 16px; }
+    ul { list-style: none; padding: 0; }
+    li { 
+      background: #f2f2f2; 
+      margin: 8px 0; 
+      padding: 10px; 
+      display: flex; 
+      justify-content: space-between;
+      border-radius: 5px;
+    }
+    .delete-btn { 
+      background: red; 
+      color: white; 
+      border: none; 
+      cursor: pointer; 
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>My Todo List</h2>
+
+  <!-- 1. FORM WITH INPUT -->
+  <form id="todoForm">
+    <input type="text" id="todoInput" placeholder="Enter todo item" required>
+    <button type="submit">Add</button>
+  </form>
+
+  <!-- 2. PLACE TO DISPLAY ITEMS -->
+  <ul id="todoList"></ul>
+
+<script>
+  // Get elements
+  const form = document.getElementById("todoForm")
+  const input = document.getElementById("todoInput")
+  const list = document.getElementById("todoList")
+
+  // Load existing todos from localStorage, or start with empty array
+  let todos = JSON.parse(localStorage.getItem("todos")) || []
+
+  // Function to display all todos in DOM
+  function displayTodos() {
+    list.innerHTML = "" // clear first so we don't get duplicates
+    
+    todos.forEach((todo, index) => {
+      const li = document.createElement("li")
+      
+      li.innerHTML = `
+        <span>${todo}</span>
+        <button class="delete-btn" onclick="deleteTodo(${index})">Delete</button>
+      `
+      
+      list.appendChild(li)
+    })
+  }
+
+  // Add new todo when form is submitted
+  form.addEventListener("submit", function(event) {
+    event.preventDefault() // stop page reload
+    
+    const newTodo = input.value.trim()
+    
+    if(newTodo !== "") {
+      todos.push(newTodo) // add to array
+      
+      // Save to localStorage so it doesn't disappear on refresh
+      localStorage.setItem("todos", JSON.stringify(todos))
+      
+      displayTodos() // show it
+      form.reset() // clear input
+      input.focus() // put cursor back in input
+    }
+  })
+
+  // Delete todo function
+  function deleteTodo(index) {
+    todos.splice(index, 1) // remove from array
+    localStorage.setItem("todos", JSON.stringify(todos))
+    displayTodos()
+  }
+
+  // Show todos when page loads
+  displayTodos()
+</script>
+
+</body>
+</html>

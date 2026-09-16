@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Student Addmission Status Checker </title>
+</head>
+<body>
+    
+
+    <script>
+        //A program to determine if a student is Admitted, not Admitted or the Admission is pending further review
+        
+        let entranceExamScore = 175;    
+        let mathGrade = "credit";
+        let englishGrade = "credit" ;
+        let age = 17;
+
+        //if entranceExamScore is between 170 and 179 -- Display Admission under Review
+        //if entranceExamScore is above 180 Admission Offered
+        //  mathGrade and englishGrade equal to Credit -- Display Admission Denied
+        // age < 16 Admission Denied
+
+        if (age < 16) { 
+            console.log("Admission Denied");
+        }else if ( entranceExamScore < 170 ) {        
+                console.log("Admission Denied");
+        }else if ( mathGrade != "credit"  ){
+            console.log("Admission Denied");
+        }else if ( englishGrade != "credit" ){
+            console.log("Admission Denied");
+        }else if ( ( entranceExamScore >= 170 ) && ( entranceExamScore <=179 ) ){
+            console.log("Admission Pending Further Review");
+        }else {
+            console.log("Admission Offered")
+        }
+
+
+    </script>
+</body>
+</html>

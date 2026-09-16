@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>todo list</title>
+
+    <style>
+        li{
+            padding: 20px;
+            border: 1px solid red;
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+
+    <form action="" id="todoForm">
+        <input type="text" placeholder="Enter a task" id="todoInput">
+        <button>Add to do</button>
+    </form>
+    <ul id="todos">
+
+
+    </ul>
+
+    <script>
+        let allTodos = [];
+
+        //select all the element
+        let todoForm = document.getElementById('todoForm');
+        let todoInput = document.getElementById('todoInput');
+        let todos = document.getElementById('todos')
+
+        //whenever the form is submitted
+        todoForm.addEventListener('submit', function(event){
+            event.preventDefault(); //used to stop browser from submiting form
+            let todoTyped = todoInput.value;
+            if( todoTyped == ""){
+                alert("Task cannot be empty")
+            }else{
+                addTodo(todoTyped)
+                todoInput.value = ''
+            }
+        })
+
+        // a function that collect todo and push it to allTodos array
+        function addTodo (todoItem){
+            allTodos.push(todoItem)
+            displayTodos();
+        }
+        //a function that loops over allTodos array and display it in ul with id todos
+        function displayTodos (){
+            if (allTodos.length > 0){
+                todos.innerHTML = ''
+                allTodos.forEach(function(td){
+                    let li = document.createElement('li');
+                    li.className = 'task';
+                    let span = document.createElement('span');
+                    let dbutton = document.createElement('button');
+                    dbutton.className ="delete_todo"
+                    span.textContent = td ;
+                    dbutton.textContent = 'Delete';
+                    li.appendChild(span);
+                    li.appendChild(dbutton);
+                    todos.appendChild(li)
+                })
+            }
+        }
+
+        //delete function
+        todos.addEventListener('click', function(){
+            if (event.target.classList.contains(task)){
+                event.target.closest('li').remove();
+            }
+            
+        })
+
+      
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Javascript Arrays </title>
+</head>
+<body>
+    <h1>Javascript Array </h1>
+    <p>Thursday 13th August 2026</p>
+    <p>Working with arrays in javascript </p>
+
+
+
+    <script>
+
+        // -- old method of declaring array variable --  let num = new Array (1,2,3,4,5)
+        // -- below is the modern way of writing array variable 
+       // let num = [1,2,3,4,5,];
+       // console.log(num);
+       // console.log(num[3]);
+        
+      
+       // console.log(names);
+       // let items = [50, "pen", 39.90, "E", true]
+       // console.log(items);
+      //  console.log(items[1]);
+
+      // let names = ["peace", 'ernest', 'Gabriel',];
+ // to display all the values in the array the below code is used
+        // alert(names[1]);
+        // alert(names[0]);
+        // alert(names[2]);
+
+// proper way to display the values stored in a variable array is below 
+        // for ( j=0; j<3; j++ ){
+       // alert(names[j]);
+
+ //in other to skip the variable value ernest the below code is used
+    //    for (let j=0; j<=2; j++){
+    //     if (names[j] == 'ernest'){
+    //         continue
+    //     }
+    //     console.log(names[j])
+    //    }
+
+// ----- using join method in array to conert an array to a string ----
+        // let myNames = ['Gabe', 'ernest', 'peace'];
+        
+        // let result = myNames.join ('-');
+        // console.log(myNames);
+        // console.log(result);
+        
+//-- exercise
+//----- writing a program to display only the names of boys from the variable pupils with array values of names of males and females
+      //  var pupils = ['James', 'Mary', 'Henry', 'Tolu', 'Andrew', 'Grace'];
+        function pupilsName (){
+        for (let k=0; k<=5; k++){            
+            if ( k % 2 != 0){
+            continue
+            }
+            console.log(pupils[k]);     
+        }
+        }
+       // pupilsName()
+
+
+// ---using .length to get the number of pupils in an array ---
+
+       let pupils = ['James', 'Mary', 'Henry', 'Tolu', 'Andrew', 'Grace', 'peace', 'ernest', 'naomi'];
+        function pupilsNameLength (){
+        for (let k=0; k< pupils.length ; k++){            
+            console.log(pupils[k]);     
+        }
+        }
+       // pupilsNameLength()
+
+
+//------using  for of loop ----
+    //    for ( let pup of pupils  ){
+    //     console.log(pup);
+    //    }
+
+
+// ------ using for in loop -----
+    //    for (let p in pupils){
+    //     console.log(p); 
+    //    }
+
+// ------ using continue -- in for in loop -----
+        //   for (let p in pupils){
+        //     if (pupils[p] == 'mary'){
+        //         continue
+        //     }
+        // console.log(pupils[p]); 
+        // }
+
+
+        const transactions = [5000, -2000, 3000, -1000, 4500];
+
+        function transactionCalculator( ){
+        for ( let amount of transactions ){
+            if ( amount > 0 ){
+                console.log(`Deposit: N${amount}`);
+            }else {
+                console.log(`Withdrawal: N${(amount * -1)}`);
+                
+            }
+        }
+    }
+    // transactionCalculator()
+
+
+
+// exercise
+// displaying employes names first, and then displaying the names with index location in the array
+        const employees = ['john', 'Mary', 'David', 'Sarah'];
+        function manager (){  
+            for ( let names of employees ){
+                console.log(names);   
+            }
+            for ( let names in employees ){
+                console.log(`${employees[names]} - ${names}`);
+            }
+        }
+       // manager ()
+
+
+//exercise
+// ---- using for loop to display list of items with index numbers attached 
+
+        const item = ['laptop', 'mouse', 'keyboard', 'headphones'];
+        function exercise2  (){
+
+            for ( let l = 0; l < item.length; l ++)
+            console.log(`item ${l +1}: ${item[l]}`); 
+        }
+       // exercise2()
+
+
+//--- forEach ---- used to apply a function to all items in an array
+    //    const items = ['laptop', 'mouse', 'keyboard', 'headphones'];
+    //    items.forEach(function (item, index ) {
+    //     console.log(`<p>${item} - ${index}</p>`);
+        
+    //    })
+
+
+//----- map ---- used to make change to the existing array and save the result in a new array variable
+        // let scores = [10, 20, 30, 40, 50, 60];
+
+        // let result = scores.map(function (sc , index) {
+        //     return sc * 2;
+        // })
+
+        // console.log(result);
+        
+        
+// ----exercise ---
+//adding bonus mark of 5 to each score
+        // const scores = [65, 72, 80, 55, 90]
+        // let newScore = scores.map(function ( scor, index){
+        //     return scor +5;
+        // })
+        // console.log(newScore);
+
+
+//exercise
+
+        const customers = ['John', 'Mary', 'David', 'Sarah'];
+        function welcomeCustomer (){
+         customers.forEach(function(name, index){
+             console.log(` Hello ${name} You have a new message `);
+            
+         })
+        }
+       // welcomeCustomer()
+        
+
+//----exercise
+        const prices = [100, 250, 500, 750];
+        function discountCalculator (){
+        let discountPrice = prices.map(function(price){
+            let discount = price * (10/100);
+            let newPrice = price - discount;
+            return newPrice;
+              
+        })
+            console.log(discountPrice);
+    }
+   // discountCalculator()
+
+
+   // to covert an array to string ---> 
+   // use below format
+  // console.log(prices.toString())
+
+
+//----- sort method --is used to sort out order of numbers/strings in array from a-z(ascending order)
+        // let names = ['John', 'Mary', 'David', 'Sarah']
+        // console.log(names.sort());
+
+        // let names = ['John', 'Abah', 'Mary', 'Yakubu', 'David', 'Zainab', 'Sarah']
+        // console.log(names.sort());
+        
+
+//---- array.pop --> used to remove the last item from the array
+//using the syntax below
+        const ncustomers = ['John', 'Abah', 'Mary', 'Yakubu', 'David', 'Zainab', 'Sarah'];
+        // let popped = ncustomers.pop();
+        // console.log(ncustomers);
+        // console.log(popped);
+        
+//--- array.push --> adds an item at the end of an array
+        // ncustomers.push('peace', 'naomi', 'Gabe');
+        // console.log(ncustomers);
+
+//--- array.shift --> used to remove the item in the 1st position of the array
+        // ncustomers.shift()
+        //  console.log(ncustomers);
+    
+//---- .unshift --> used to add item to the 1st item in the array
+        // ncustomers.unshift('ernest');
+        // console.log(ncustomers);
+     //   let name12 = "roi";
+//---how to check if a variable is an array
+    // let check = Array.isArray(ncustomers);
+    // console.log(check);
+    // console.log(Array.isArray(name12));
+
+
+
+//---  .includes method ---> used to search for an item in an array
+    // let result = ncustomers.includes('Mary');
+    // let result1 = ncustomers.includes('sunday');
+    // console.log(result);
+    // console.log(result1);
+    
+
+//--- using prompt to receive items and saving it in an array and displayingthe result in alphabetic order
+    // let fruit1 = prompt("Enter fruit 1");
+    // let fruit2 = prompt("Enter fruit 2");
+    // let fruit3 = prompt("Enter fruit 3");
+
+    // let myFruits = [fruit1, fruit2, fruit3];
+    // console.log(myFruits.sort());
+    
+
+//--- usimg loop to collect 5fruits, store in an array and display ir alphabetically
+       function fruitArrayCollector ( ){
+        let fruits = [ ];
+        for (let f =1; f <=5; f++) {
+            let fruit = prompt('Enter your Fruit ' +f );
+            fruits.push(fruit);
+        }
+        console.log(fruits.sort());
+    }
+   //  fruitArrayCollector ()
+        
+    
+    const cars = ['toyota', 'honda', 'benz', 'hyundia', 'mayback'];
+        for ( let car = 0; car <=4; car++){
+            if ( car == 2 ){
+                continue
+            }
+            console.log(cars[car]);
+            
+        }
+
+
+    
+    
+
+
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE >
+<html>
+	<head>
+	<title> Html Forms </title>
+	<meta charset="UTF-8">
+	<meta name="authour" content="roi ernest" >
+	</head>
+	<body> 
+		<div style="min-height:500px; border:1px solid red; padding:10px;">
+			<h2> Html Forms </h2>
+			
+			<form action="infos.html" method="get" >
+				<p for="lname"> Last Name; </p> 
+				<input type="text" name="lastname" placeholder=" Please Enter your last name" id="lname" maxlength="10" size="50" required> 
+				<p for="fname"> First Name; </p> 
+				<input type="text" name="firsttname" placeholder=" Please Enter your first name" id="fname" required>  
+				<p for="pw"> Password <span style="color:red;">***</span> :</p> <br>
+				<input type="password" name="password" placeholder="Please Enter your password" id="pw" maxlength="6" required>
+				<p for="email"> E-mail Address </> <br>
+				<input type="email" name="email" id="email" required> <br> <br>
+				<p> Age </p> <br>
+				<input type="number" name="age" min="18" max="20" > <br><br>
+				<p>Date </p> <br>
+				<input type="date"> <br> 
+				<p> Input your passport </p> </br>
+				<input type="file" name="image">  
+				<br>
+				<p>Are you Above 18? </p> <br>
+				<input type="radio" name="verify" value="Yes"  > Yes <br>
+				<input type="radio" name="verify" value="No" > No <br>
+				<input type="radio" name="verify" value="Maybe" > Maybe <br>
+				<p> How do you want us to contact you </p> <br>
+				<input type="checkbox" name="contact1" value="sms" > <label> SMS </label> <br>
+				<input type="checkbox" name="contact2" value="phone" > <label> Phone </label> <br>
+				<input type="checkbox" name="contact3" value="Email" > <label> Email </label> <br> <br>
+				<label> Tell us about yourself </label> <br>
+				<textarea rows="10" cols="50">  </textarea>
+				
+				<br> <br>
+				<button type="reset" > Reset form </button> <br> <br>
+				 <input type="submit" value="submit">
+				
+				
+			</form>
+			
+		</div>
+	</body>
+</html?

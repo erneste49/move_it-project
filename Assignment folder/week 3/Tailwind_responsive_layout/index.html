@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+  <head>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title> Tailwind Responsive Layout Assignment </title>
+    <style>
+      div{
+        border:1px solid white;
+        min-height: 100px;
+      }
+    </style>
+  </head>
+  <body>
+       
+    <div class="container mx-auto ">
+      <div class="grid gap-2 p-3 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 ">
+        <div class="bg-orange-400 h-24"></div>
+        <div class="bg-orange-400 h-24"></div>
+      </div>
+
+
+      <div class="grid gird-cols-1 p-3">
+      <div class="bg-yellow-300 h-48"> </div>
+      </div>
+
+      <div class="grid gap-2 grid-cols-3  p-3 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3">
+        <div class="bg-cyan-600"></div>
+        <div class="bg-cyan-600"></div>
+        <div class="bg-cyan-600"></div>
+      </div>
+
+      <div class="grid gap-2 p-3 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+        <div class="bg-olive-950"></div>
+        <div class="bg-olive-950"></div>
+        <div class="bg-olive-950"></div>
+        <div class="bg-olive-950"></div>
+      </div>
+
+
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keyboard Event </title>
+</head>
+<body>
+    <h1>Working with Keyup and Keydown</h1>
+    
+    <input type="text" id="username">
+    <a href="index.html" id="linky">View Index Page </a>
+
+
+    <script>
+        //exploring keyup and keydown
+        let usernameInput = document.getElementById('username');
+     //   usernameInput.addEventListener('keydown', function(){
+
+     //adding an eventobject below
+        usernameInput.addEventListener('keyup', function(event){
+
+        //  console.log(usernameInput.value);  //how to read value of form element
+        //  console.log(event);  
+
+        //example 3
+        //read the key that was pressed
+            let keyPressed = event.key;
+          //  console.log(keyPressed); To check if key pressed reflected on console
+
+          if (keyPressed == "Enter"){
+            console.log(`Searching for ${usernameInput.value}`);
+            
+          }
+            
+
+        })
+
+        //to stop the browser from acting in default way
+        let linky = document.getElementById('linky');
+        linky.addEventListener('click', function(event){
+            alert('We are currently maintaining page');
+            event.preventDefault()
+        }) 
+
+    </script>
+
+</body>
+</html>

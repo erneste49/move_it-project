@@ -1,0 +1,54 @@
+
+
+/* media query
+ min-width: from the number and above
+	max-width: from the number and below
+  */
+  /* 
+	on a small screen: change background to pink
+	on a medium screen: change background to blue
+	on a large screen: change background to green
+  */
+  
+ /* 
+ @media screen and (min-width: 480px ) {
+	
+	
+}
+*/
+div{
+	border:1px solid red;
+	min-height:100px;
+}
+
+.container{
+	padding: 50px 10%;
+}
+
+.whyus{
+	display:grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 20px;
+	padding:20px;
+}
+
+
+@media screen and (max-width: 960px ) and (min-width:600px) {
+	.whyus{
+		grid-template-columns: repeat(2, 1fr);
+	}
+	
+	
+}
+@media screen and (max-width: 600px ) {
+	.whyus{
+		grid-template-columns: repeat(1, 1fr);
+	}
+	
+}
+
+.services{
+	display:grid;
+	grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+	gap: 20px;
+}

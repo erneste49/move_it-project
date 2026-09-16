@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logical operators : if - else if - else </title>
+</head>
+<body>
+    
+
+    <script>
+    // loan Approval
+    let monthlyIncome = 300000;
+    let creditScore = 620;
+    let employmentStatus = "employed";
+
+    if( (monthlyIncome < 250000) ){
+        console.log("You do not qualify for a loan, Reason: Monthly Income is below requirement");
+        
+    } else if( (creditScore < 700) ){
+        console.log("You do not qualify for a loan. Reason: Credit score is below Treshold")
+    }else if (employmentStatus != "employed") {
+        console.log(" Loan denied because you are not employed ")
+    }else {
+        console.log("You are eligble for a loan")
+    }
+
+
+    //
+
+    </script>
+</body>
+</html>
