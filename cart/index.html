@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping cart </title>
+</head>
+<style>
+    #products{
+        display: flex;
+        flex-wrap: wrap;
+        gap:20px;
+        justify-content: center;
+        align-content: center;
+    }
+    .product{
+        min-width: 30%;
+        border: 1px solid gray;
+        text-align: center;
+        padding: 20px;
+        background-color: aliceblue;
+    }
+    .cart-item-container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        padding: 20px;
+        background-color: antiquewhite;
+    }
+</style>
+<body>
+
+    <!--to display no of item in cart-->
+    <div id="cartcount">  
+
+    </div>
+
+    <!--to display available products-->
+    <div class="products-list" id="products">
+        
+    </div>
+
+    <!--to display itemsin cart-->
+    <div id="carts" class="carts">
+
+
+    </div>
+    <!--to display summary of cart-->
+    <div id="cart_summary">
+
+
+    </div>
+    
+    <script src="main.js"></script> 
+</body>
+</html>

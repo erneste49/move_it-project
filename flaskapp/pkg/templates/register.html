@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register </title>
+    <style> 
+        
+        .deco{
+            width:400px;
+            padding: 10px;
+            background-color:skyblue;
+            border:none;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1> Registration Form </h1>
+        <form action=''  method='post' novalidate >
+            {{ myform.csrf_token }} 
+           {# {{form.hidden_tag()}} #}  {# does the same work as above csrf_token #}
+            <p> 
+                {{ myform.username.label }}   <br>
+                {{ myform.username(class_='deco', placeholder='Enter your username') }} <br>
+                {% for error in myform.username.errors %}
+                    <span style='color:red'> {{error}} </span>
+                {%endfor%}
+            </p>
+            <p> 
+                {{ myform.firstname.label }}   <br>
+                {{ myform.firstname(class_='deco', placeholder='Enter your firstname') }} <br>
+                {% for error in myform.firstname.errors %}
+                    <span style='color:red'> {{error}} </span>
+                {%endfor%}
+            </p>
+            <p> 
+                {{ myform.lastname.label }}   <br>
+                {{ myform.lastname(class_='deco', placeholder='Enter your lastname') }} <br>
+                {% for error in myform.lastname.errors %}
+                    <span style='color:red'> {{error}} </span>
+                {%endfor%}
+            </p>
+            <p> 
+                {{ myform.email.label }}   <br>
+                {{ myform.email(class_='deco', placeholder='Enter your email') }} <br>
+                {%for error in myform.email.errors %}
+                    <span style='color:red'> {{error}} </span>
+                {%endfor%}
+            </p>
+            <p> 
+                {{ myform.password.label }}   <br>
+                {{ myform.password(class_="deco", placeholder='Choose your password') }} <br>
+                {% for error in myform.password.errors %}
+                    <span style='color:red'> {{error}} </span>
+                {%endfor%}
+            </p>
+            <p> 
+                {{ myform.confirm_password.label }}   <br>
+                {{ myform.confirm_password(class_="deco", placeholder='Confirm your password') }} <br>
+                {% for error in myform.confirm_password.errors %}
+                    <span style='color:red'> {{error}} </span>
+                {%endfor%}
+            </p>
+            <p>
+                {{myform.submit}}    
+            </p>
+        </form>
+    </div>
+</body>
+</html>

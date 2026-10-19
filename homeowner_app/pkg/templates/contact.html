@@ -1,0 +1,173 @@
+
+{% extends "master.html" %}
+
+{%block title%}
+Contacts: our contact page
+{%endblock%}
+
+{% block maincontent %}
+  <main>
+
+    <!-- ============================
+         PAGE BANNER
+         ============================ -->
+    <section class="page-banner">
+      <div class="container">
+        <h1>Contact Us</h1>
+        <p>We'd love to hear from you. Reach out to learn more about our work, make a donation, or join our mission.</p>
+        <div class="page-banner__breadcrumb">
+          <a href="index.html">Home</a>
+          <span>/</span>
+          <span>Contact Us</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================
+         CONTACT CONTENT
+         ============================ -->
+    <section class="section contact-section" id="contact">
+      <div class="container">
+        <div class="contact__grid">
+
+          <!-- Contact Form -->
+          <div class="contact__form-wrapper reveal">
+            <h2>Send Us a Message</h2>
+            <p>Fill out the form below and our team will get back to you within 24 hours.</p>
+
+            <form class="contact__form" id="contact-form" novalidate>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="contact-name">Full Name <span class="required">*</span></label>
+                  <input type="text" id="contact-name" name="name" placeholder="Enter your full name" required>
+                  <span class="error-message" id="name-error">Please enter your name</span>
+                </div>
+                <div class="form-group">
+                  <label for="contact-email">Email Address <span class="required">*</span></label>
+                  <input type="email" id="contact-email" name="email" placeholder="Enter your email address" required>
+                  <span class="error-message" id="email-error">Please enter a valid email</span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="contact-subject">Subject <span class="required">*</span></label>
+                <input type="text" id="contact-subject" name="subject" placeholder="What is this about?" required>
+                <span class="error-message" id="subject-error">Please enter a subject</span>
+              </div>
+
+              <div class="form-group">
+                <label for="contact-message">Message <span class="required">*</span></label>
+                <textarea id="contact-message" name="message" placeholder="Write your message here..." rows="6" required></textarea>
+                <span class="error-message" id="message-error">Please enter your message</span>
+              </div>
+
+              <button type="submit" class="btn btn--primary btn--lg contact__submit" id="contact-submit">
+                <span class="contact__submit-text">Send Message</span>
+                <span class="contact__submit-loading" style="display:none;">Sending...</span>
+              </button>
+
+              <!-- Success message (hidden by default) -->
+              <div class="contact__success" id="contact-success" style="display:none;" role="alert">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <div>
+                  <strong>Message sent successfully!</strong>
+                  <p>Thank you for reaching out. Our team will respond within 24 hours.</p>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <!-- Contact Info Sidebar -->
+          <div class="contact__info reveal">
+            <!-- Info Card: Address -->
+            <div class="contact__info-card">
+              <div class="contact__info-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div>
+                <h4>Our Office</h4>
+                <p>Moat Academy for Developers<br>Allen Road, Ikeja<br>Lagos, Nigeria</p>
+              </div>
+            </div>
+
+            <!-- Info Card: Phone -->
+            <div class="contact__info-card">
+              <div class="contact__info-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+              </div>
+              <div>
+                <h4>Phone</h4>
+                <p><a href="tel:+2349122377880">(912) 237 7880</a></p>
+              </div>
+            </div>
+
+            <!-- Info Card: Email -->
+            <div class="contact__info-card">
+              <div class="contact__info-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              <div>
+                <h4>Email</h4>
+                <p><a href="mailto:home@website.com">home@website.com</a></p>
+              </div>
+            </div>
+
+            <!-- Info Card: Hours -->
+            <div class="contact__info-card">
+              <div class="contact__info-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
+              <div>
+                <h4>Office Hours</h4>
+                <p>Mon – Fri: 8:00 AM – 5:00 PM<br>Sat: 9:00 AM – 1:00 PM</p>
+              </div>
+            </div>
+
+            <!-- Social Links -->
+            <div class="contact__socials">
+              <h4>Follow Us</h4>
+              <div class="contact__socials-links">
+                <a href="#" aria-label="Facebook">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                </a>
+                <a href="#" aria-label="Twitter / X">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+                <a href="#" aria-label="Instagram">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================
+         MAP SECTION
+         ============================ -->
+    <section class="section section--light contact-map" id="map">
+      <div class="container">
+        <div class="section__header reveal">
+          <h2>Find Us</h2>
+          <p>Visit our office on Allen Road, Ikeja, Lagos or reach out through any of the channels above.</p>
+        </div>
+        <div class="contact-map__wrapper reveal">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3963.4423840775!2d3.3480567!3d6.6018553!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b9228f20b97e7%3A0x6c8d3e1b8f3c3c1e!2sAllen%20Road%2C%20Ikeja%2C%20Lagos!5e0!3m2!1sen!2sng!4v1694000000000"
+            width="100%"
+            height="400"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="HomeOwner Foundation office location — Allen Road, Ikeja, Lagos"
+          ></iframe>
+        </div>
+      </div>
+    </section>
+
+  </main>
+{% endblock %}
+

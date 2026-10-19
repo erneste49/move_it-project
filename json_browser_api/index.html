@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+</head>
+<body>
+    <!--how to save something in local storage-->
+
+    <h1>Welcome to the Homepage</h1>
+    <a href="notepage.html"> View saved Note </a>
+    <h1>Keep a special Note for yourself</h1>
+    <p id="response"> </p>
+    <textarea name="note" id="note"> </textarea> <br> <br>
+    <button id="keep">Keep Note</button>
+
+
+    <script>
+        let keepBtn = document.getElementById("keep");
+        let noteContent = document.getElementById("note");
+        let responsePTag = document.getElementById("response");
+
+        keepBtn.addEventListener("click", function(){
+            let content = noteContent.value;
+            //alert(content)
+
+            //if it is not empty  keep it in local storage
+            if (content == ""){
+                alert("Please enter a note")
+            }else{
+                localStorage.setItem("special_note", content)
+                noteContent.value = " "
+            }
+            //display response
+            responsePTag.innerHTML = "<span style='color:green'> Note stored successfully..!!! </span>";
+         })
+
+    </script>
+    
+</body>
+</html>

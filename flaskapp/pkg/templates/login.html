@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Love to Blog</title>
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+       <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="/static/css/styles.css" rel="stylesheet" />
+        <link href="/static/css/custom.css" rel="stylesheet" />
+    </head>
+    <body>
+       <!-- Navigation-->
+       <nav class="navbar navbar-expand-lg bg-body-tertiary" id="mainbar">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand" href="index.html">Blog L<span style="font-size:15px;">❤️</span>vers</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto py-lg-0">
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/">Home</a></li>
+                    
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/login">Login</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/post">Post</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link px-lg-3 py-3 py-lg-4 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Hi Charles
+                        </a>
+                        <ul class="dropdown-menu px-4">
+                           <li><a class="dropdown-item" href="#">Sign Out</a></li>
+                          </ul>
+                      </li>
+              
+                </ul>
+            </div>
+        </div>
+      </nav>
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url('/static/assets/img/contact-bg.jpg')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="page-heading">
+                            <h1>Login.</h1>
+                            <span class="subheading">Login to your account.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Main Content-->
+        <main class="mb-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <p>Login to your account and continue writing!</p>
+                        <div class="my-5">
+                            
+                            <form action="{{url_for('process')}}" method="post">
+                               
+                                <div class="form-floating">
+                                    <input class="form-control" id="email" type="email" name="email" placeholder="Enter your email..." data-sb-validations="required,email" />
+                                    <label for="email">Email address</label>
+                                    <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
+                                    <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
+                                </div>
+                                <div class="form-floating">
+                                    <input class="form-control" id="password" name="password" type="password" placeholder="Enter your password..." data-sb-validations="required" />
+                                    <label for="phone">Password</label>
+                                    <div class="invalid-feedback" data-sb-feedback="password:required">Password is required.</div>
+                                </div>
+                               
+                               
+                                <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
+                                <!-- Submit Button-->
+                                <button class="btn btn-danger col-12 text-uppercase" id="submitButton" type="submit">Login</button>
+                            </form>
+<br>
+<br>
+                            <form action="{{url_for('notify')}}" method="get">
+                                <input class="form-control" type="text" id="newemail" name="newemail" placeholder="Enter email" >
+                                <button class="btn btn-danger" id="submitbtn"  type="submit"> Notify Me </button>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <!-- Footer-->
+        <footer class="border-top">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                     
+                        <div class="small text-center text-muted fst-italic">Copyright &copy; 2025</div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="assets/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+      
+    </body>
+</html>

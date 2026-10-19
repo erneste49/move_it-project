@@ -53,7 +53,7 @@ def input_info():
 roi = Users()
 user_data = input_info()   #assigning function to a variable/string
 #print(roi.register_user("roi ernest", "09155511654", "roiernest01@gmail.com", "22 Shomolu Lagos State", "roi123ns", "nickname 123 me" ))   #supplying values as arguments for the parameter
-print(roi.register_user(*user_data))   #supply values for parameter by entering values from keyboard
+#print(roi.register_user(*user_data))   #supply values for parameter by entering values from keyboard
 print("-------------------------------------------------------------------------")  
 roi.show_registered_users() #to view list of registered users in db
 print("-------------------------------------------------------------------------")

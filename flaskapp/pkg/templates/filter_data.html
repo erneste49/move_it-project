@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View User Data </title>
+</head>
+<body>
+    <h1> Here are the Stored user details  </h1>
+    
+    <div> 
+        <table border="1" width="900px"> 
+            <thead>
+                <tr> 
+                    <th> ID </th>
+                    <th> Name </th>  
+                    <th> Email </th>  
+                    <th> Meaasage </th>
+                </tr>    
+            </thead>
+            <tbody>
+                {% for user in all_data %}    
+                <tr> 
+                    <td> {{ user.id }} </td>
+                    <td> {{ user.name }} </td>
+                    <td> {{ user.email }} </td>
+                    <td> {{ user.message }} </td>
+                </tr>
+                {% else %}
+                <tr> 
+                    <td colspan='4'> No data found. </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            
+        </table>
+    </div>
+   
+</body>
+</html>

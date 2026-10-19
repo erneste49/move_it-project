@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Clinic | Doctor</title>
+    <link href="{{ url_for('static', filename='css/doctor.css') }}" rel="stylesheet">
+</head>
+<body>
+<div class="layout">
+    {% include "partials/aside.html" %}
+    <main class="main">
+        <header class="top-header">
+            <div>
+                <h1>{% if doctor_account %}Welcome, Dr. {{ doctor_account.first_name }} {{ doctor_account.last_name }}{% else %}Doctors{% endif %}</h1>
+                <p>{% if doctor_account %}Review your appointments and assigned patient information.{% else %}View available clinic doctors.{% endif %}</p>
+            </div>
+            <div class="profile"><i class="bi bi-person-circle"></i><div><strong>{% if doctor_account %}Dr. {{ doctor_account.first_name }}{% else %}Doctor Directory{% endif %}</strong><span>{% if doctor_account and doctor_account.specialty %}{{ doctor_account.specialty.name }}{% else %}Star Clinic{% endif %}</span></div></div>
+        </header>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% for category, message in messages %}<div class="flash {{ category }}">{{ message }}</div>{% endfor %}
+        {% endwith %}
+
+        {% if doctor_account %}
+        <section class="cards">
+            <div class="stat-card"><div class="icon-box"><i class="bi bi-calendar-check"></i></div><div><span>My Appointments</span><strong>{{ appointments|length }}</strong></div></div>
+            <div class="stat-card"><div class="icon-box"><i class="bi bi-people"></i></div><div><span>My Patients</span><strong>{{ appointments|map(attribute='patient_id')|unique|list|length }}</strong></div></div>
+            <div class="stat-card"><div class="icon-box"><i class="bi bi-person-badge"></i></div><div><span>Doctors</span><strong>{{ doctors|length }}</strong></div></div>
+        </section>
+
+        <section class="panel" id="appointments">
+            <div class="section-title"><h2>My Appointments</h2></div>
+            <div class="list">
+                <div class="row head"><span>Patient</span><span>Date</span><span>Reason</span><span>Status</span></div>
+                {% for appointment in appointments %}
+                <div class="row">
+                    <span>{{ appointment.patient.first_name }} {{ appointment.patient.last_name }}</span>
+                    <span>{{ appointment.appointment_schedule.strftime('%d %b %Y %I:%M %p') }}</span>
+                    <span>{{ appointment.reason }}</span>
+                    <span class="actions">
+                        <form method="POST" action="{{ url_for('update_appointment_status', appointment_id=appointment.id) }}" class="inline-form status-form">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                            <select name="status">
+                                {% for status in ['Pending', 'Confirmed', 'Completed', 'Cancelled'] %}
+                                    <option value="{{ status }}" {% if appointment.status == status %}selected{% endif %}>{{ status }}</option>
+                                {% endfor %}
+                            </select>
+                            <button class="btn mini" type="submit">Save</button>
+                        </form>
+                        <a class="btn btn-light mini" href="{{ url_for('appointment_detail', appointment_id=appointment.id) }}">View</a>
+                    </span>
+                </div>
+                {% else %}<div class="row"><span>No appointments assigned to you.</span></div>{% endfor %}
+            </div>
+        </section>
+
+        <section class="panel" id="patients">
+            <div class="section-title"><h2>Assigned Patients</h2></div>
+            <div class="list">
+                <div class="row head"><span>Patient</span><span>Phone</span><span>Reason</span><span>Action</span></div>
+                {% for appointment in appointments|unique(attribute='patient_id') %}
+                <div class="row">
+                    <span>{{ appointment.patient.first_name }} {{ appointment.patient.last_name }}</span>
+                    <span>{{ appointment.patient.phone }}</span>
+                    <span>{{ appointment.reason }}</span>
+                    <span><a class="btn btn-light mini" href="{{ url_for('appointment_detail', appointment_id=appointment.id) }}">View Appointment</a></span>
+                </div>
+                {% else %}<div class="row"><span>No assigned patients yet.</span></div>{% endfor %}
+            </div>
+        </section>
+        {% endif %}
+
+        <section class="panel" id="doctors">
+            <div class="section-title"><h2>Our Doctors</h2></div>
+            <div class="doctor-grid">
+                {% for doctor in doctors %}
+                <div class="doctor-card">
+                    <i class="bi bi-person-circle"></i>
+                    <h3>Dr. {{ doctor.first_name }} {{ doctor.last_name }}</h3>
+                    <p>{{ doctor.specialty.name if doctor.specialty else 'General Medicine' }}</p>
+                    <span>{{ doctor.availability }}</span>
+                </div>
+                {% else %}<p>No doctors are currently available.</p>{% endfor %}
+            </div>
+        </section>
+
+        <section class="panel" id="specialties">
+            <div class="section-title"><h2>Medical Specialties</h2></div>
+            <div class="doctor-grid">
+                {% for specialty in specialties %}
+                <div class="doctor-card"><h3>{{ specialty.name }}</h3><p>{{ specialty.description }}</p></div>
+                {% else %}<p>No specialties are currently available.</p>{% endfor %}
+            </div>
+        </section>
+    </main>
+</div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update User Form </title>
+</head>
+<body>
+    <div>
+        <h1> Complete Form below to Update Registered User </h1>  
+        
+        <form action="/update/old_user" method="post">
+           <input type='hidden' name='csrf_token' value='{{csrf_token() }}' >   
+           <p>
+            <label> ID: </label> <br>
+            <input type="text" name="old_id" placeholder="Enter the existing user's ID to update record" required>
+            </p> 
+            <p>
+            <label> Name: </label> <br>
+            <input type="text" name="new_username" placeholder="Enter New name" required>
+            </p>
+
+            <p>
+            <label> Email:  </label> <br>
+            <input type="text" name="new_user_email" placeholder="Enter New email" required >
+            </p>
+
+            <p>
+            <label> Enter New Message: </label> <br>
+            <textarea name="new_user_message"  required> </textarea>
+            </p>
+           <button type="submit"> Submit Record </button>
+
+        </form>
+         
+
+    </div>
+</body>
+</html>

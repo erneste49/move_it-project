@@ -1,0 +1,14 @@
+
+{% extends 'master.html' %}
+
+{% block title%}
+Error: page does not exist
+{%endblock%}
+
+{% block maincontent%}
+<div style="min-height:100vh; padding:50px 20px;">
+    <h1 style="color:red; background-color:aliceblue; text-align:center; "> Sorry.... The page you are looking for is not available.. </h1>
+<div> <img src="{{url_for('static', filename='images/error.jpg')}}" alt="page not found error" class="img-error " loading="lazy"></div>
+</div> 
+{% endblock%}
+

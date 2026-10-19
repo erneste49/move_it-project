@@ -1,0 +1,60 @@
+
+{% extends "partials/master.html" %}
+
+{% block title %}
+Registration page
+{%endblock%}
+
+{% block style %}
+ <script src="https://cdn.tailwindcss.com"></script> <!--tailwind css -->
+<link href="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.css" rel="stylesheet" /> <!-- flowbit css -->
+<link rel="stylesheet" href="{{ url_for('user.static' , filename='css/style.css') }}" >
+{% endblock %}
+
+{% block maincontent%}
+<div class="register-container">
+    <!--register section -->
+  <main class="p-6 md:p-12 flex items-center">
+    <div class="max-w-md w-full mx-auto">
+      <a href="index.html" class="lg:hidden text-2xl font-black text-orange-500">move <span class="text-slate-900">it</span></a>
+      <div class="bg-white rounded-3xl shadow-sm border p-7 md:p-9 mt-8">
+        <div class="flex bg-slate-100 p-1 rounded-xl mb-7">
+          <a href="{{url_for('user.login')}}" id="loginTab" class="flex-1 py-2.5 text-center rounded-lg bg-white font-bold">Login</a>
+          <a href="{{url_for('user.register_user')}}" id="registerTab" class="flex-1 py-2.5 text-center rounded-lg text-slate-500">Register</a>
+        </div>
+        
+        <div id="registerForm" class="phidden">
+          <h2 class="text-3xl font-black">Create account</h2>
+         
+          <label class="block mt-6 text-sm font-bold">Full name</label>
+          <input id="name" class="w-full mt-2 p-3 rounded-xl border" placeholder="Your name">
+          <label class="block mt-4 text-sm font-bold">Email</label>
+          <input id="regEmail" type="email" class="w-full mt-2 p-3 rounded-xl border" placeholder="you@example.com">
+          <label class="block mt-6 text-sm font-bold">Phone Number </label>
+          <input id="phone" class="w-full mt-2 p-3 rounded-xl border" placeholder="Phone Number ">
+          <label class="block mt-6 text-sm font-bold">State of residence</label>
+          <input id="state" class="w-full mt-2 p-3 rounded-xl border" placeholder="Your state of residence">
+          <label class="block mt-6 text-sm font-bold">Local government</label>
+          <input id="lga" class="w-full mt-2 p-3 rounded-xl border" placeholder="Local government area">
+          <label class="block mt-6 text-sm font-bold">Address, Closest landmark</label>
+          <input id="landmark" class="w-full mt-2 p-3 rounded-xl border" placeholder="Address">
+          <label class="block mt-4 text-sm font-bold">Password</label>
+          <input id="regPassword" type="password" class="w-full mt-2 p-3 rounded-xl border" placeholder="Create a password">
+          {#
+          <label class="block mt-4 text-sm font-bold">Status</label>
+
+          <select id="role" class="w-full mt-2 p-3 rounded-xl border">
+            <option value="buyer">User</option>
+            <option value="seller">Seller</option>
+          </select> 
+           #}
+
+          <button class="w-full mt-6 bg-sky-500 text-black py-3 rounded-xl font-bold"> Create account </button>
+          <p id="regMsg" class="text-sm mt-4 text-center"></p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+</div>
+{% endblock %}

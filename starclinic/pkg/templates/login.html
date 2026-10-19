@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Clinic | Login</title>
+    <link href="{{ url_for('static', filename='css/login.css') }}" rel="stylesheet">
+</head>
+<body class="auth-page">
+    <div class="auth-wrap">
+        <div class="auth-brand">
+            <i class="bi bi-heart-pulse-fill"></i>
+            <h1>Star Clinic</h1>
+            <p>Secure Clinic Portal</p>
+            <span>Log in to access your role-based dashboard.</span>
+        </div>
+
+        <div class="auth-form">
+            <a class="back" href="{{ url_for('index') }}">&larr; Back to home</a>
+            <h2>Welcome back</h2>
+            <p class="muted">Enter your email and password.</p>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% for category, message in messages %}
+                    <p class="flash {{ category }}">{{ message }}</p>
+                {% endfor %}
+            {% endwith %}
+
+            <form method="POST" action="{{ url_for('login') }}">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+                <label>Email
+                    <input type="email" name="email" value="{{ email }}" placeholder="Enter your email">
+                    {% if error.get('email') %}<p class="field-error">{{ error['email'] }}</p>{% endif %}
+                </label>
+
+                <label>Password
+                    <input type="password" name="password" placeholder="Enter your password" >
+                    {% if error.get('password') %}<p class="field-error">{{ error['password'] }}</p>{% endif %}
+                </label>
+
+                <button class="btn auth-submit" type="submit">Login</button>
+            </form>
+
+            <p class="center muted">Don't have an account? <a href="{{ url_for('signup') }}">Register here</a></p>
+        </div>
+    </div>
+</body>
+</html>

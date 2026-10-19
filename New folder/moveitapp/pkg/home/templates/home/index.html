@@ -1,0 +1,233 @@
+{% extends "partials/master.html" %}
+
+{% block title %}
+MoveIt homepage
+{%endblock%}
+  
+
+{% block maincontent%}
+    <!--banner -->
+    <div class="banner_section md:grid md:grid-cols-2 gap-3">
+        <div class="banner_box2 lg:h-96"> <img src="{{url_for('static', filename='images/logo.jpeg')}}" alt=""> </div>
+
+        <div class="banner_box1  lg:h-96">
+            <div class="banner1  md:grid md:grid-cols-1 gap-5 md:mt-[70px] ">
+                <img src="" alt="">
+                <div class="bb_box1 mt- md:mt-0"> <a href="{{url_for('home.relocate')}}"><h1 class="text-center text-white font-bold hover:text-orange-500 hover:bg-white hover:border hover:border-orange-500 p-3 bg-sky-500 w-80px"> Relocate </h1></a> </div>
+                <div class="bb_box2 mt-3 md:mt-0"> <a href="#cart"><h1 class="text-center text-white font-bold hover:text-orange-500 hover:bg-white hover:border hover:border-orange-500 p-3 bg-sky-500 "> Buy & Sell Items </h1></a> </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!--what we do -->
+    <div class="what_we_do">
+        <h2 class="text-center text-sky-950 text-2xl font-extrabold mb-5">What We Do </h2>
+
+        <div class="services">
+            <!--service 1-->
+            <div class="service1">
+                <div class="bg- block max-w-sm border border-default rounded-base shadow-xs">
+                    
+                        <img class="rounded-t-base" src="{{url_for('static', filename='images/move1.jpeg')}}" alt="" />
+                    
+                    <div class="p-6 text-center">
+                        <span class="inline-flex items-center bg-brand-softer border border-brand-subtle text-fg-brand-strong text-xs font-medium px-1.5 py-0.5 rounded-sm">
+                            <svg class="w-3 h-3 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.122 17.645a7.185 7.185 0 0 1-2.656 2.495 7.06 7.06 0 0 1-3.52.853 6.617 6.617 0 0 1-3.306-.718 6.73 6.73 0 0 1-2.54-2.266c-2.672-4.57.287-8.846.887-9.668A4.448 4.448 0 0 0 8.07 6.31 4.49 4.49 0 0 0 7.997 4c1.284.965 6.43 3.258 5.525 10.631 1.496-1.136 2.7-3.046 2.846-6.216 1.43 1.061 3.985 5.462 1.754 9.23Z"/></svg>
+                            Relocate
+                        </span>
+                        
+                            <h5 class="mt-3 mb-6 text-2xl font-semibold tracking-tight text-heading"> Moving should feel easy, contact us to help  you relocate properties.</h5>
+                        
+                        <a href="{{url_for('home.relocate')}}" class="inline-flex items-center text-white bg-orange-500 box-border border border-transparent hover:bg-white hover:border hover:border-orange-500 hover:text-orange-500 focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
+                            Book Now
+                            <svg class="w-4 h-4 ms-1.5 rtl:rotate-180 -me-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!--service 2-->
+            <div class="service2">
+                <div class="bg- block max-w-sm border border-default rounded-base shadow-xs">
+                  
+                        <img class="rounded-t-base" src="{{url_for('static', filename='images/move1.jpeg')}}" alt="" />
+                    
+                    <div class="p-6 text-center">
+                        <span class="inline-flex items-center bg-brand-softer border border-brand-subtle text-fg-brand-strong text-xs font-medium px-1.5 py-0.5 rounded-sm">
+                            <svg class="w-3 h-3 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.122 17.645a7.185 7.185 0 0 1-2.656 2.495 7.06 7.06 0 0 1-3.52.853 6.617 6.617 0 0 1-3.306-.718 6.73 6.73 0 0 1-2.54-2.266c-2.672-4.57.287-8.846.887-9.668A4.448 4.448 0 0 0 8.07 6.31 4.49 4.49 0 0 0 7.997 4c1.284.965 6.43 3.258 5.525 10.631 1.496-1.136 2.7-3.046 2.846-6.216 1.43 1.061 3.985 5.462 1.754 9.23Z"/></svg>
+                            Buy
+                        </span>
+                        
+                            <h5 class="mt-3 mb-6 text-2xl font-semibold tracking-tight text-heading"> Just Relocated and need househould items shop now for quality products at affordable prices and negotiate better deals.</h5>
+                        
+                        <a href="#" class="inline-flex items-center text-white bg-orange-500 box-border border border-transparent hover:bg-white hover:border hover:border-orange-500 hover:text-orange-500 focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
+                            Shop Now
+                            <svg class="w-4 h-4 ms-1.5 rtl:rotate-180 -me-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service3">                
+                <div class="bg- block max-w-sm border border-default rounded-base shadow-xs">
+                    
+                        <img class="rounded-t-base" src="{{url_for('static', filename='images/sell1.jpeg')}}" alt="" />
+                    
+                    <div class="p-6 text-center">
+                        <span class="inline-flex items-center bg-brand-softer border border-brand-subtle text-fg-brand-strong text-xs font-medium px-1.5 py-0.5 rounded-sm">
+                            <svg class="w-3 h-3 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.122 17.645a7.185 7.185 0 0 1-2.656 2.495 7.06 7.06 0 0 1-3.52.853 6.617 6.617 0 0 1-3.306-.718 6.73 6.73 0 0 1-2.54-2.266c-2.672-4.57.287-8.846.887-9.668A4.448 4.448 0 0 0 8.07 6.31 4.49 4.49 0 0 0 7.997 4c1.284.965 6.43 3.258 5.525 10.631 1.496-1.136 2.7-3.046 2.846-6.216 1.43 1.061 3.985 5.462 1.754 9.23Z"/></svg>
+                            Sell
+                        </span>
+                       
+                            <h5 class="mt-3 mb-6 text-2xl font-semibold tracking-tight text-heading">Do you have an item for sale? Post now and connect to active buyer.</h5>
+                      
+                        <a href="{{url_for('user.login')}}" class="inline-flex items-center text-white bg-orange-500 box-border border border-transparent hover:bg-white hover:border hover:border-orange-500 hover:text-orange-500 focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
+                            Register Now
+                            <svg class="w-4 h-4 ms-1.5 rtl:rotate-180 -me-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>    
+    </div>
+
+    <!--e-commerce-->
+    <div id="cart" class="shop">
+        <h1 class="text-center text-sky-950 text-2xl font-extrabold mb-5">Shop Now</h1>
+        <div class="shop_box md:grid md:grid-cols-2 lg:grid-cols-3">   
+            <div  class="s_box1 border border-default rounded-base shadow-xs"></div>
+            <div  class="s_box2 border border-default rounded-base shadow-xs"></div>
+            <div  class="s_box3 border border-default rounded-base shadow-xs"></div>
+            <div  class="s_box4 border border-default rounded-base shadow-xs"></div>
+            <div  class="s_box5 border border-default rounded-base shadow-xs"></div>
+            <div  class="s_box6 border border-default rounded-base shadow-xs"></div>
+            <div  class="s_box7 border border-default rounded-base shadow-xs"></div>
+            <div  class="s_box8 border border-default rounded-base shadow-xs"></div>
+        
+            <div class="border b-red-600 text-center flex justify-center align-center"> <a href="#" class="text-white bg-orange-500 text-center hover:bg-sky-500 h-[40px] dark:focus:ring-cyan-800 font-medium rounded-base text-sm px-4 py-2 my-3 text-center  leading-5"> View More</a>
+           
+            </div>
+        </div>
+    </div>
+    
+    <!--reviews-->
+    <div class="reviews">
+        <div><h1 class="text-center text-sky-950 lg:mb-5 text-2xl font-extrabold">Reviews from Users </h1></div>
+        <div id="gallery" class="relative w-full" data-carousel="slide">
+            <!-- Carousel wrapper -->
+            <div class="relative h-[280px] overflow-hidden rounded-lg md:h-[225px]">
+                <!-- Item 1 -->
+                <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                    <article class="bg-[#fffaf5] border rounded-3xl p-7">
+                        <div class="flex gap-1 text-orange-500 text-lg">★★★★★</div>
+                        <p class="text-slate-600 leading-7 mt-5">“The whole moving process was incredibly smooth. The team arrived on time, handled everything carefully, and made moving day stress-free.”</p>
+                        <div class="flex items-center gap-3 mt-7">
+                            <div class="w-11 h-11 rounded-full bg-orange-100 grid place-items-center font-black text-orange-600">AO</div>
+                            <div><b class="block">Amaka O.</b><span class="text-sm text-slate-500">Home moving customer</span></div>
+                        </div>
+                    </article>
+                </div>
+                <!-- Item 2 -->
+                <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
+                    <article class="bg-slate-950 text-white rounded-3xl p-7">
+                        <div class="flex gap-1 text-orange-400 text-lg">★★★★★</div>
+                        <p class="text-slate-300 leading-7 mt-5">“I listed my furniture on the marketplace and found a buyer quickly. The seller dashboard was simple and easy to use.”</p>
+                        <div class="flex items-center gap-3 mt-7">
+                            <div class="w-11 h-11 rounded-full bg-orange-500 grid place-items-center font-black">DK</div>
+                            <div><b class="block">David K.</b><span class="text-sm text-slate-400">Marketplace seller</span></div>
+                        </div>
+                    </article>
+                </div>
+                <!-- Item 3 -->
+                <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                    <article class="bg-[#fffaf5] border rounded-3xl p-7">
+                        <div class="flex gap-1 text-orange-500 text-lg">★★★★★</div>
+                        <p class="text-slate-600 leading-7 mt-5">“I found a great dining set through the marketplace. The experience was straightforward from browsing to contacting the seller.”</p>
+                        <div class="flex items-center gap-3 mt-7">
+                            <div class="w-11 h-11 rounded-full bg-orange-100 grid place-items-center font-black text-orange-600">TS</div>
+                            <div><b class="block">Tolu S.</b><span class="text-sm text-slate-500">Marketplace buyer</span></div>
+                        </div>
+                    </article>
+                </div>
+                <!-- Item 4 -->
+                <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                   <article class="bg-slate-950 border rounded-3xl p-7">
+                        <div class="flex gap-1 text-orange-500 text-lg">★★★★★</div>
+                        <p class="text-slate-600 leading-7 mt-5">“The whole moving process was incredibly smooth. The team arrived on time, handled everything carefully, and made moving day stress-free.”</p>
+                        <div class="flex items-center gap-3 mt-7">
+                            <div class="w-11 h-11 rounded-full bg-orange-100 grid place-items-center font-black text-orange-600">AO</div>
+                            <div><b class="block">Amaka O.</b><span class="text-sm text-slate-500">Home moving customer</span></div>
+                        </div>
+                    </article>
+                </div>
+                <!-- Item 5 -->
+                <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                   <article class="bg-[#fffaf5] text-white rounded-3xl p-7">
+                        <div class="flex gap-1 text-orange-400 text-lg">★★★★★</div>
+                        <p class="text-slate-300 leading-7 mt-5">“I listed my furniture on the marketplace and found a buyer quickly. The seller dashboard was simple and easy to use.”</p>
+                        <div class="flex items-center gap-3 mt-7">
+                            <div class="w-11 h-11 rounded-full bg-orange-500 grid place-items-center font-black">DK</div>
+                            <div><b class="block">David K.</b><span class="text-sm text-slate-400">Marketplace seller</span></div>
+                        </div>
+                    </article>
+                </div>
+                <!--Item 6-->
+                <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                   <article class="bg-slate-950 text-white rounded-3xl p-7">
+                        <div class="flex gap-1 text-orange-400 text-lg">★★★★★</div>
+                        <p class="text-slate-300 leading-7 mt-5">“I listed my furniture on the marketplace and found a buyer quickly. The seller dashboard was simple and easy to use.”</p>
+                        <div class="flex items-center gap-3 mt-7">
+                            <div class="w-11 h-11 rounded-full bg-orange-500 grid place-items-center font-black">DK</div>
+                            <div><b class="block">David K.</b><span class="text-sm text-slate-400">Marketplace seller</span></div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            <!-- Slider controls -->
+            <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+                <span class="inline-flex items-center justify-center w-10 h-24px rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                    <svg class="w-5 h-5 text-white rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m15 19-7-7 7-7"/></svg>
+                    <span class="sr-only">Previous</span>
+                </span>
+            </button>
+            <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+                <span class="inline-flex items-center justify-center w-10 h-24px rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                    <svg class="w-5 h-5 text-white rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 5 7 7-7 7"/></svg>
+                    <span class="sr-only">Next</span>
+                </span>
+            </button>
+        </div>
+
+    </div>
+
+    <!--Get in touch-->
+    <div class="contact_us">
+        <section class="bg-white dark:bg-gray-900">
+            <div class="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
+                <h2 class="mb-4 text-2xl tracking-tight font-extrabold text-center text-sky-950 dark:text-white">Contact Us</h2>
+                <p class="mb-8 lg:mb-16 font-light text-center text-gray-500 dark:text-gray-400 sm:text-xl">Got a Question? Want to send feedback about services? Need details about our Business plan? Let us know.</p>
+                <form action="" method="" class="space-y-8">
+                    <div>
+                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your email</label>
+                        <input type="email" name="c_email" id="email" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light" placeholder="enter your email" required>
+                    </div>
+                    <div>
+                        <label for="subject" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Subject</label>
+                        <input type="text" name="c_subject" id="subject" class="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 shadow-sm focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light" placeholder="Let us know how we can help you" required>
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Your message</label>
+                        <textarea name="c_message" id="message" rows="6" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg shadow-sm border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Leave a comment..."></textarea>
+                    </div>
+                    <button type="submit" class="py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-orange-500 sm:w-fit hover:bg-white hover:border hover:border-orange-500 hover:text-orange-500   focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Send message</button>
+                </form>
+            </div>
+        </section>
+
+    </div>
+
+    
+{% endblock %}

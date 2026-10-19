@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Love to Blog</title>
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="{{url_for('static', filename='css/styles.css')}}" rel="stylesheet" />
+        <link href="{{url_for('static', filename='css/custom.css')}}" rel="stylesheet" />
+    </head>
+    <body>
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg bg-body-tertiary" id="mainbar">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="index.html">Blog L<span style="font-size:15px;">❤️</span>vers</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto py-lg-0">
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/">Home</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/login">Login</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/post">Post</a></li>
+                         <li class="nav-item dropdown">
+                            <a class="nav-link px-lg-3 py-3 py-lg-4 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                              Hi {{session.get('firstname')}} {{session.get('lastname')}}
+                            </a>
+                            <ul class="dropdown-menu px-4">
+                                <li><a class="dropdown-item" href="#">Sign Out</a></li>
+                            </ul>
+                          </li>
+                  
+                    </ul>
+                </div>
+            </div>
+          </nav>
+        <!-- Page Header-->
+       <!--- <header class="masthead" style="background-image: url('/demo/assets/img/home-bg.jpg')"> -->
+        <header class="masthead" style="background-image: url('{{url_for('static', filename='assets/img/home-bg.jpg')}}')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="site-heading">
+                            {# calculate score #}
+                            {% if score > 50 %}
+                                <h1> You passed.... </h1>
+                            {% else %}
+                                <h1> You failed.... </h1>
+                            {% endif %}
+                            {% for x in nums %}
+                                <h2>{{ x }} </h2>
+                            {% endfor %}
+                            <h3> {{ age }} </h3>
+                            <h1>Welcome...</h1>
+                           {# <a href="/user/Robert/"> User profile </a> #}
+                           <a href="{{url_for("get_user", username="Thomson")}}"> User profile </a>
+                           <p>{{fname|trim|escape}} </p>
+                            <span class="subheading">A place to express yourself</span>
+                            <hr>
+
+                            <table border="1" width="300">
+                            <tr>
+                                <th>S/N </th>
+                                <th>Names </th>   
+                            </tr>
+                            {% for emp in list  %}
+                            <tr> 
+                                <td> {{ loop.index }}</td>
+                                <td> {{ emp }} </td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                        <hr>
+                        <table border="1" width="500">
+                           <tr>
+                            <th>Role </th>
+                            <th> Name </th>
+                            </tr>
+                            {% for person in team %}
+                            
+                            <tr>
+                              <td> {{ person[0:] }} </td>
+                              <td> {{ team[person] }} </td>   
+                            </tr>
+                            {%endfor%}
+                        
+                        </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Main Content-->
+        <div class="container px-4 px-lg-2">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <!-- Post preview-->
+                    <div class="post-preview">
+                        <a href="post.html">
+                            <h2 class="post-title">Man must explore, and this is exploration at its greatest</h2>
+                            <h3 class="post-subtitle">Problems look mighty small from 150 miles up</h3>
+                        </a>
+                        <p class="post-meta">
+                            Posted by
+                            <a href="#!">Start Bootstrap</a>
+                            on September 24, 2023
+                        </p>
+                    </div>
+                    <!-- Divider-->
+                    <hr class="my-4" />
+                    <!-- Post preview-->
+                    <div class="post-preview">
+                        <a href="post.html"><h2 class="post-title">I believe every human has a finite number of heartbeats. I don't intend to waste any of mine.</h2></a>
+                        <p class="post-meta">
+                            Posted by
+                            <a href="#!">Start Bootstrap</a>
+                            on September 18, 2023
+                        </p>
+                    </div>
+                    <!-- Divider-->
+                    <hr class="my-4" />
+                    <!-- Post preview-->
+                    <div class="post-preview">
+                        <a href="post.html">
+                            <h2 class="post-title">Science has not yet mastered prophecy</h2>
+                            <h3 class="post-subtitle">We predict too much for the next year and yet far too little for the next ten.</h3>
+                        </a>
+                        <p class="post-meta">
+                            Posted by
+                            <a href="#!">Start Bootstrap</a>
+                            on August 24, 2023
+                        </p>
+                    </div>
+                    <!-- Divider-->
+                    <hr class="my-4" />
+                    <!-- Post preview-->
+                    <div class="post-preview">
+                        <a href="post.html">
+                            <h2 class="post-title">Failure is not an option</h2>
+                            <h3 class="post-subtitle">Many say exploration is part of our destiny, but it’s actually our duty to future generations.</h3>
+                        </a>
+                        <p class="post-meta">
+                            Posted by
+                            <a href="#!">Start Bootstrap</a>
+                            on July 8, 2023
+                        </p>
+                    </div>
+                    <!-- Divider-->
+                    <hr class="my-4" />
+                    <!-- Pager-->
+                    <div class="d-flex justify-content-end mb-4"><a class="btn btn-danger text-uppercase" href="#!">Older Posts →</a></div>
+                </div>
+            </div>
+        </div>
+
+        
+        <!-- Footer-->
+        <footer class="border-top">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                         
+                        <div class="small text-center text-muted fst-italic">Copyright &copy; 2025</div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="assets/js/bootstrap.bundle.min.js"></script>
+       
+        
+    </body>
+</html>

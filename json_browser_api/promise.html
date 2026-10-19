@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>promise</title>
+</head>
+<body>
+    
+
+    <script>
+        //creating a promise 
+        function fetchDrinks(age){
+            return new Promise(function(resolve, reject){
+                //perform activities like db connection, fetching and then perform action
+                if (age > 18){
+                    resolve("Here is your drink")
+                }else{
+                    reject("No drink for you")
+                }
+
+            })
+        }
+
+
+    /* old way of using a promise
+
+        //how to handle a function that returns a promise
+       fetchDrinks(27)
+       .then(function(data){
+       console.log(`the server said ${data}`)
+
+       })
+       .catch(function(err){
+        console.log(`the server rejected with note: ${err}`);
+        
+       })   
+       */
+
+
+//uding async - await
+
+    async function drinkstatus(){
+        let age = Number(prompt("How old are you "))
+        let resp = await fetchDrinks(age)
+        console.log(resp);
+        
+    }
+
+    //using try, catch to handle error
+    async function drinkReport() {
+        try{
+            let age = Number(prompt("How old are you "))
+            let resp = await fetchDrinks(age)
+            console.log(resp);
+        }catch(error){
+            alert("Please enter a valid age, age must be number ," + error);
+            
+        }
+
+    }
+
+    //drinkstatus()
+    drinkReport()
+
+
+
+
+
+    </script>
+</body>
+</html>

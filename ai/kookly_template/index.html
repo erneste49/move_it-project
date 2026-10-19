@@ -1,0 +1,1125 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Discover, cook, and share the Nigerian recipes you love on Kookly."
+    />
+    <title>Kookly — Good food brings us together</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #20271f;
+        --muted: #777d74;
+        --paper: #fffdf8;
+        --green: #245d42;
+        --green-dark: #193f2e;
+        --orange: #e47b3d;
+        --line: #eeeae1;
+        --serif: "Playfair Display", Georgia, serif;
+        --sans: "DM Sans", Arial, sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: var(--sans);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      button,
+      input {
+        font: inherit;
+      }
+
+      button,
+      a {
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      .shell {
+        width: min(1160px, calc(100% - 64px));
+        margin-inline: auto;
+      }
+
+      .topbar {
+        height: 76px;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid rgba(32, 39, 31, 0.07);
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 32px;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        color: var(--green);
+        font-size: 25px;
+        font-weight: 700;
+        letter-spacing: -1.5px;
+      }
+
+      .brand-mark {
+        width: 31px;
+        height: 31px;
+        display: grid;
+        place-items: center;
+        border-radius: 10px 10px 10px 3px;
+        background: var(--orange);
+        color: white;
+      }
+
+      .brand-mark svg {
+        width: 19px;
+        height: 19px;
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 34px;
+        margin-left: auto;
+        color: #555b53;
+        font-size: 13px;
+        font-weight: 600;
+      }
+
+      .nav-links a:hover,
+      .sign-in:hover {
+        color: var(--green);
+      }
+
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 23px;
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .sign-in {
+        color: #555b53;
+      }
+
+      .button {
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 9px;
+        padding: 0 18px;
+        border: 0;
+        border-radius: 8px;
+        background: var(--green);
+        color: white;
+        font-size: 13px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background 160ms ease, transform 160ms ease;
+      }
+
+      .button:hover {
+        transform: translateY(-1px);
+        background: var(--green-dark);
+      }
+
+      .button svg {
+        width: 16px;
+        height: 16px;
+      }
+
+      .hero {
+        position: relative;
+        overflow: hidden;
+        min-height: 520px;
+        display: flex;
+        align-items: center;
+        margin-top: 25px;
+        border-radius: 18px;
+        background: #f1eee4;
+        isolation: isolate;
+      }
+
+      .hero::before {
+        position: absolute;
+        z-index: -1;
+        inset: 0;
+        background:
+          linear-gradient(90deg, rgba(23, 37, 27, 0.93) 0%, rgba(23, 37, 27, 0.79) 38%, rgba(23, 37, 27, 0.12) 74%, rgba(23, 37, 27, 0.02) 100%),
+          url("https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=1800&q=85") center 52% / cover;
+        content: "";
+      }
+
+      .hero-content {
+        width: min(570px, 62%);
+        padding: 66px 0 70px 72px;
+        color: white;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin: 0 0 21px;
+        color: #cbe0c4;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 1.7px;
+        text-transform: uppercase;
+      }
+
+      .eyebrow::before {
+        width: 20px;
+        height: 1px;
+        background: #f5a76f;
+        content: "";
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+
+      .hero h1 {
+        max-width: 520px;
+        margin-bottom: 17px;
+        font-family: var(--serif);
+        font-size: clamp(42px, 5.2vw, 65px);
+        font-weight: 600;
+        letter-spacing: -2.6px;
+        line-height: 1.08;
+      }
+
+      .hero h1 span {
+        color: #f4a66f;
+        font-style: italic;
+      }
+
+      .hero-copy {
+        max-width: 410px;
+        margin-bottom: 27px;
+        color: rgba(255, 255, 255, 0.79);
+        font-size: 14px;
+        line-height: 1.8;
+      }
+
+      .hero .button {
+        min-height: 49px;
+        padding-inline: 20px;
+        background: #ee9158;
+      }
+
+      .hero .button:hover {
+        background: #db7840;
+      }
+
+      .hero-note {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        margin-top: 31px;
+        color: rgba(255, 255, 255, 0.78);
+        font-size: 11px;
+      }
+
+      .avatar-stack {
+        display: flex;
+        padding-left: 6px;
+      }
+
+      .avatar-stack img {
+        width: 27px;
+        height: 27px;
+        margin-left: -6px;
+        border: 2px solid #36503d;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      .section {
+        padding-top: 78px;
+      }
+
+      .section-heading {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 20px;
+        margin-bottom: 25px;
+      }
+
+      .section-heading h2 {
+        margin-bottom: 7px;
+        font-family: var(--serif);
+        font-size: 34px;
+        font-weight: 600;
+        letter-spacing: -1px;
+      }
+
+      .section-heading p {
+        margin-bottom: 0;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .text-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding-bottom: 4px;
+        color: var(--green);
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .text-link svg {
+        width: 15px;
+        height: 15px;
+        transition: transform 160ms ease;
+      }
+
+      .text-link:hover svg {
+        transform: translateX(3px);
+      }
+
+      .category-grid {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 16px;
+      }
+
+      .category {
+        display: grid;
+        justify-items: center;
+        gap: 10px;
+        padding: 14px 9px 13px;
+        border: 1px solid transparent;
+        border-radius: 12px;
+        background: transparent;
+        color: var(--ink);
+        cursor: pointer;
+        transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
+      }
+
+      .category:hover,
+      .category.active {
+        transform: translateY(-2px);
+        border-color: #e2eade;
+        background: #f3f7f0;
+      }
+
+      .category-emoji {
+        width: 62px;
+        height: 62px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        background: #f2eee3;
+        font-size: 29px;
+      }
+
+      .category span:last-child {
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .recipes-section {
+        padding-top: 77px;
+        padding-bottom: 80px;
+      }
+
+      .recipe-controls {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        margin: 25px 0 23px;
+      }
+
+      .filter-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .filter {
+        min-height: 34px;
+        padding: 0 13px;
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        background: transparent;
+        color: #646a62;
+        font-size: 11px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 160ms ease;
+      }
+
+      .filter:hover,
+      .filter.active {
+        border-color: var(--green);
+        background: var(--green);
+        color: white;
+      }
+
+      .search {
+        width: 225px;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        padding: 0 12px;
+        border: 1px solid var(--line);
+        border-radius: 7px;
+        background: white;
+      }
+
+      .search svg {
+        width: 16px;
+        height: 16px;
+        flex: 0 0 auto;
+        color: #878d84;
+      }
+
+      .search input {
+        width: 100%;
+        min-width: 0;
+        border: 0;
+        outline: 0;
+        color: var(--ink);
+        font-size: 11px;
+      }
+
+      .search input::placeholder {
+        color: #979c94;
+      }
+
+      .recipe-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 19px;
+      }
+
+      .recipe-card {
+        overflow: hidden;
+        border: 1px solid #eeece6;
+        border-radius: 11px;
+        background: white;
+        transition: transform 180ms ease, box-shadow 180ms ease;
+      }
+
+      .recipe-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 30px rgba(32, 39, 31, 0.09);
+      }
+
+      .recipe-image {
+        position: relative;
+        height: 180px;
+        overflow: hidden;
+        background: #eee9dc;
+      }
+
+      .recipe-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 350ms ease;
+      }
+
+      .recipe-card:hover .recipe-image img {
+        transform: scale(1.04);
+      }
+
+      .recipe-tag {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        padding: 6px 9px;
+        border-radius: 5px;
+        background: rgba(255, 253, 248, 0.94);
+        color: var(--green);
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.3px;
+      }
+
+      .save-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 31px;
+        height: 31px;
+        display: grid;
+        place-items: center;
+        border: 0;
+        border-radius: 50%;
+        background: rgba(255, 253, 248, 0.95);
+        color: #596057;
+        cursor: pointer;
+      }
+
+      .save-button svg {
+        width: 16px;
+        height: 16px;
+      }
+
+      .save-button.saved {
+        color: #d95952;
+      }
+
+      .save-button.saved svg {
+        fill: currentColor;
+      }
+
+      .recipe-info {
+        padding: 14px 14px 13px;
+      }
+
+      .recipe-info h3 {
+        margin-bottom: 9px;
+        font-family: var(--serif);
+        font-size: 17px;
+        font-weight: 600;
+        letter-spacing: -0.25px;
+      }
+
+      .recipe-meta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: #797f76;
+        font-size: 10px;
+      }
+
+      .recipe-meta span {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      .recipe-meta svg {
+        width: 13px;
+        height: 13px;
+      }
+
+      .rating {
+        color: #bd762c;
+        font-weight: 700;
+      }
+
+      .empty-state {
+        display: none;
+        padding: 44px 16px;
+        border: 1px dashed #ddd9cf;
+        border-radius: 10px;
+        color: var(--muted);
+        text-align: center;
+        font-size: 13px;
+      }
+
+      .empty-state.visible {
+        display: block;
+      }
+
+      .community {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 30px;
+        overflow: hidden;
+        margin-bottom: 78px;
+        padding: 39px 46px;
+        border-radius: 14px;
+        background: #f1f4eb;
+      }
+
+      .community::after {
+        position: absolute;
+        right: 25%;
+        bottom: -115px;
+        width: 250px;
+        height: 250px;
+        border: 1px solid rgba(36, 93, 66, 0.08);
+        border-radius: 50%;
+        content: "";
+      }
+
+      .community-copy {
+        position: relative;
+        z-index: 1;
+        max-width: 560px;
+      }
+
+      .community-copy .eyebrow {
+        margin-bottom: 11px;
+        color: var(--green);
+      }
+
+      .community h2 {
+        margin-bottom: 8px;
+        font-family: var(--serif);
+        font-size: 29px;
+        font-weight: 600;
+        letter-spacing: -0.7px;
+      }
+
+      .community p {
+        margin-bottom: 0;
+        color: #70776c;
+        font-size: 12px;
+        line-height: 1.7;
+      }
+
+      .community .button {
+        position: relative;
+        z-index: 1;
+        flex: 0 0 auto;
+      }
+
+      footer {
+        padding: 25px 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .footer-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        color: #81867e;
+        font-size: 10px;
+      }
+
+      .footer-brand {
+        font-size: 17px;
+      }
+
+      .footer-links {
+        display: flex;
+        gap: 22px;
+      }
+
+      .footer-links a:hover {
+        color: var(--green);
+      }
+
+      @media (max-width: 900px) {
+        .shell {
+          width: min(100% - 44px, 740px);
+        }
+
+        .nav-links {
+          gap: 19px;
+        }
+
+        .hero-content {
+          width: 70%;
+          padding-left: 48px;
+        }
+
+        .recipe-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 16px;
+        }
+
+        .category-grid {
+          grid-template-columns: repeat(3, 1fr);
+          gap: 9px;
+        }
+      }
+
+      @media (max-width: 620px) {
+        .shell {
+          width: calc(100% - 36px);
+        }
+
+        .topbar {
+          height: 66px;
+        }
+
+        .nav {
+          gap: 12px;
+        }
+
+        .brand {
+          font-size: 22px;
+        }
+
+        .nav-links {
+          display: none;
+        }
+
+        .nav-actions {
+          gap: 13px;
+          font-size: 12px;
+        }
+
+        .nav-actions .button {
+          min-height: 39px;
+          padding-inline: 12px;
+          font-size: 11px;
+        }
+
+        .hero {
+          min-height: 520px;
+          margin-top: 14px;
+          border-radius: 14px;
+        }
+
+        .hero::before {
+          background:
+            linear-gradient(90deg, rgba(23, 37, 27, 0.9), rgba(23, 37, 27, 0.55)),
+            url("https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=1000&q=85") center / cover;
+        }
+
+        .hero-content {
+          width: 100%;
+          padding: 48px 25px;
+        }
+
+        .hero h1 {
+          font-size: clamp(42px, 12vw, 57px);
+          letter-spacing: -1.8px;
+        }
+
+        .hero-copy {
+          font-size: 13px;
+        }
+
+        .section {
+          padding-top: 58px;
+        }
+
+        .section-heading {
+          align-items: start;
+        }
+
+        .section-heading h2 {
+          font-size: 29px;
+        }
+
+        .section-heading p {
+          max-width: 255px;
+          line-height: 1.6;
+        }
+
+        .section-heading > .text-link {
+          margin-top: 9px;
+          white-space: nowrap;
+        }
+
+        .category-grid {
+          grid-template-columns: repeat(3, 1fr);
+          gap: 4px;
+        }
+
+        .category {
+          padding: 10px 4px;
+        }
+
+        .category-emoji {
+          width: 55px;
+          height: 55px;
+          font-size: 25px;
+        }
+
+        .category span:last-child {
+          font-size: 11px;
+        }
+
+        .recipes-section {
+          padding-top: 58px;
+          padding-bottom: 58px;
+        }
+
+        .recipe-controls {
+          align-items: stretch;
+          flex-direction: column-reverse;
+          gap: 14px;
+        }
+
+        .search {
+          width: 100%;
+          height: 42px;
+        }
+
+        .filter-list {
+          gap: 7px;
+        }
+
+        .filter {
+          padding-inline: 11px;
+        }
+
+        .recipe-grid {
+          gap: 11px;
+        }
+
+        .recipe-image {
+          height: 135px;
+        }
+
+        .recipe-info {
+          padding: 11px 10px;
+        }
+
+        .recipe-info h3 {
+          min-height: 40px;
+          margin-bottom: 8px;
+          font-size: 15px;
+          line-height: 1.3;
+        }
+
+        .recipe-meta {
+          align-items: start;
+          gap: 5px;
+          font-size: 9px;
+        }
+
+        .recipe-meta span {
+          gap: 3px;
+        }
+
+        .community {
+          align-items: start;
+          flex-direction: column;
+          margin-bottom: 55px;
+          padding: 29px 23px;
+        }
+
+        .community h2 {
+          font-size: 25px;
+        }
+
+        .footer-content {
+          align-items: start;
+          flex-direction: column;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <nav class="nav shell" aria-label="Main navigation">
+        <a class="brand" href="#" aria-label="Kookly home">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M7 4v5m4-5v5m-2-5v16m7-16c-2 2-3 4-3 7h3v9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </span>
+          kookly
+        </a>
+        <div class="nav-links">
+          <a href="#recipes">Explore recipes</a>
+          <a href="#categories">Categories</a>
+          <a href="#community">Our community</a>
+        </div>
+        <div class="nav-actions">
+          <a class="sign-in" href="#community">Log in</a>
+          <a class="button" href="#community">Join Kookly <span aria-hidden="true">↗</span></a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <div class="shell">
+        <section class="hero" aria-labelledby="hero-title">
+          <div class="hero-content">
+            <p class="eyebrow">Your table, your story</p>
+            <h1 id="hero-title">Good food brings us <span>together.</span></h1>
+            <p class="hero-copy">
+              From Sunday jollof to your new favourite pasta, discover and share the
+              recipes that make every meal feel like home.
+            </p>
+            <a class="button" href="#recipes">
+              Find your next favourite
+              <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <path d="M4 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </a>
+            <div class="hero-note">
+              <div class="avatar-stack" aria-hidden="true">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=80&h=80&q=80" alt="" />
+                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=80&h=80&q=80" alt="" />
+                <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=80&h=80&q=80" alt="" />
+              </div>
+              <span>Join 12,000+ home cooks sharing a little love</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="categories" aria-labelledby="categories-title">
+          <div class="section-heading">
+            <div>
+              <h2 id="categories-title">What are you craving?</h2>
+              <p>A little inspiration for whatever's on your mind.</p>
+            </div>
+            <a class="text-link" href="#recipes">
+              Browse all
+              <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <path d="M4 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </a>
+          </div>
+          <div class="category-grid" aria-label="Filter recipes by category">
+            <button class="category" data-category="Nigerian" type="button">
+              <span class="category-emoji" aria-hidden="true">🍲</span>
+              <span>Nigerian</span>
+            </button>
+            <button class="category" data-category="Soups" type="button">
+              <span class="category-emoji" aria-hidden="true">🥣</span>
+              <span>Soups</span>
+            </button>
+            <button class="category" data-category="Rice" type="button">
+              <span class="category-emoji" aria-hidden="true">🍚</span>
+              <span>Rice dishes</span>
+            </button>
+            <button class="category" data-category="Quick" type="button">
+              <span class="category-emoji" aria-hidden="true">🥗</span>
+              <span>Quick &amp; easy</span>
+            </button>
+            <button class="category" data-category="Dessert" type="button">
+              <span class="category-emoji" aria-hidden="true">🍰</span>
+              <span>Desserts</span>
+            </button>
+            <button class="category" data-category="International" type="button">
+              <span class="category-emoji" aria-hidden="true">🍝</span>
+              <span>International</span>
+            </button>
+          </div>
+        </section>
+
+        <section class="recipes-section" id="recipes" aria-labelledby="recipes-title">
+          <div class="section-heading">
+            <div>
+              <h2 id="recipes-title">Made with love</h2>
+              <p>Recipes our community can't stop making.</p>
+            </div>
+            <a class="text-link" href="#community">
+              Share a recipe
+              <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <path d="M4 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </a>
+          </div>
+          <div class="recipe-controls">
+            <div class="filter-list" role="group" aria-label="Recipe filters">
+              <button class="filter active" data-filter="All" type="button" aria-pressed="true">All recipes</button>
+              <button class="filter" data-filter="Nigerian" type="button" aria-pressed="false">Nigerian</button>
+              <button class="filter" data-filter="Quick" type="button" aria-pressed="false">Quick &amp; easy</button>
+              <button class="filter" data-filter="International" type="button" aria-pressed="false">International</button>
+            </div>
+            <label class="search">
+              <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <circle cx="8.8" cy="8.8" r="5.8" stroke="currentColor" stroke-width="1.5" />
+                <path d="m13.2 13.2 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+              </svg>
+              <input id="recipe-search" type="search" placeholder="Search recipes..." aria-label="Search recipes" />
+            </label>
+          </div>
+          <div class="recipe-grid" id="recipe-grid">
+            <article class="recipe-card" data-categories="Nigerian Rice">
+              <div class="recipe-image">
+                <img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=700&h=500&q=85" alt="A colourful bowl of Nigerian jollof rice" />
+                <span class="recipe-tag">NIGERIAN FAVOURITE</span>
+                <button class="save-button" type="button" aria-label="Save Jollof rice with a smoky twist" aria-pressed="false">
+                  <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M16.5 7.1c0 4.1-6.5 8-6.5 8s-6.5-3.9-6.5-8a3.6 3.6 0 0 1 6.5-2.1 3.6 3.6 0 0 1 6.5 2.1Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+                  </svg>
+                </button>
+              </div>
+              <div class="recipe-info">
+                <h3>Jollof rice with a smoky twist</h3>
+                <div class="recipe-meta">
+                  <span><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.4" /><path d="M10 6v4l2.5 1.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" /></svg> 45 mins</span>
+                  <span class="rating">★ 4.9 <span>(128)</span></span>
+                </div>
+              </div>
+            </article>
+            <article class="recipe-card" data-categories="Nigerian Soups">
+              <div class="recipe-image">
+                <img src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=700&h=500&q=85" alt="A rich, colourful bowl of homemade soup" />
+                <span class="recipe-tag">COMFORT FOOD</span>
+                <button class="save-button" type="button" aria-label="Save Egusi soup and soft pounded yam" aria-pressed="false">
+                  <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M16.5 7.1c0 4.1-6.5 8-6.5 8s-6.5-3.9-6.5-8a3.6 3.6 0 0 1 6.5-2.1 3.6 3.6 0 0 1 6.5 2.1Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" /></svg>
+                </button>
+              </div>
+              <div class="recipe-info">
+                <h3>Egusi soup &amp; soft pounded yam</h3>
+                <div class="recipe-meta">
+                  <span><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.4" /><path d="M10 6v4l2.5 1.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" /></svg> 1 hr 10 mins</span>
+                  <span class="rating">★ 5.0 <span>(96)</span></span>
+                </div>
+              </div>
+            </article>
+            <article class="recipe-card" data-categories="International Quick">
+              <div class="recipe-image">
+                <img src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=700&h=500&q=85" alt="Fresh pasta with tomatoes and herbs" />
+                <span class="recipe-tag">READY IN 20 MIN</span>
+                <button class="save-button" type="button" aria-label="Save Creamy tomato basil pasta" aria-pressed="false">
+                  <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M16.5 7.1c0 4.1-6.5 8-6.5 8s-6.5-3.9-6.5-8a3.6 3.6 0 0 1 6.5-2.1 3.6 3.6 0 0 1 6.5 2.1Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" /></svg>
+                </button>
+              </div>
+              <div class="recipe-info">
+                <h3>Creamy tomato basil pasta</h3>
+                <div class="recipe-meta">
+                  <span><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.4" /><path d="M10 6v4l2.5 1.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" /></svg> 20 mins</span>
+                  <span class="rating">★ 4.8 <span>(74)</span></span>
+                </div>
+              </div>
+            </article>
+            <article class="recipe-card" data-categories="Nigerian Quick">
+              <div class="recipe-image">
+                <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=700&h=500&q=85" alt="Golden, freshly baked savoury pie" />
+                <span class="recipe-tag">WEEKEND PICK</span>
+                <button class="save-button" type="button" aria-label="Save Flaky Nigerian meat pies" aria-pressed="false">
+                  <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M16.5 7.1c0 4.1-6.5 8-6.5 8s-6.5-3.9-6.5-8a3.6 3.6 0 0 1 6.5-2.1 3.6 3.6 0 0 1 6.5 2.1Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" /></svg>
+                </button>
+              </div>
+              <div class="recipe-info">
+                <h3>Flaky Nigerian meat pies</h3>
+                <div class="recipe-meta">
+                  <span><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.4" /><path d="M10 6v4l2.5 1.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" /></svg> 50 mins</span>
+                  <span class="rating">★ 4.9 <span>(81)</span></span>
+                </div>
+              </div>
+            </article>
+          </div>
+          <p class="empty-state" id="empty-state">No recipes found. Try another search or category.</p>
+        </section>
+
+        <section class="community" id="community" aria-labelledby="community-title">
+          <div class="community-copy">
+            <p class="eyebrow">Pull up a chair</p>
+            <h2 id="community-title">Your recipe deserves to be shared.</h2>
+            <p>Pass down a family favourite, show off your latest creation, and inspire someone's next meal.</p>
+          </div>
+          <a class="button" href="mailto:hello@kookly.com?subject=Join%20Kookly">
+            Share your first recipe
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <path d="M4 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </a>
+        </section>
+      </div>
+    </main>
+
+    <footer>
+      <div class="footer-content shell">
+        <a class="brand footer-brand" href="#" aria-label="Kookly home">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M7 4v5m4-5v5m-2-5v16m7-16c-2 2-3 4-3 7h3v9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          </span>
+          kookly
+        </a>
+        <span>Made with a little extra love. © 2025 Kookly</span>
+        <div class="footer-links">
+          <a href="#community">About</a>
+          <a href="mailto:hello@kookly.com">Contact</a>
+          <a href="#recipes">Recipes</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const filterButtons = [...document.querySelectorAll(".filter")];
+      const categoryButtons = [...document.querySelectorAll(".category")];
+      const recipeCards = [...document.querySelectorAll(".recipe-card")];
+      const searchInput = document.querySelector("#recipe-search");
+      const emptyState = document.querySelector("#empty-state");
+      let activeFilter = "All";
+
+      function updateRecipes() {
+        const query = searchInput.value.trim().toLowerCase();
+        let visibleCount = 0;
+
+        recipeCards.forEach((card) => {
+          const categories = card.dataset.categories.split(" ");
+          const matchesFilter = activeFilter === "All" || categories.includes(activeFilter);
+          const matchesQuery = card.textContent.toLowerCase().includes(query);
+          const visible = matchesFilter && matchesQuery;
+          card.hidden = !visible;
+          if (visible) visibleCount += 1;
+        });
+
+        emptyState.classList.toggle("visible", visibleCount === 0);
+      }
+
+      function setFilter(filter) {
+        activeFilter = filter;
+        filterButtons.forEach((button) => {
+          const active = button.dataset.filter === filter;
+          button.classList.toggle("active", active);
+          button.setAttribute("aria-pressed", String(active));
+        });
+        categoryButtons.forEach((button) => {
+          button.classList.toggle("active", button.dataset.category === filter);
+        });
+        updateRecipes();
+      }
+
+      filterButtons.forEach((button) => {
+        button.addEventListener("click", () => setFilter(button.dataset.filter));
+      });
+
+      categoryButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          setFilter(button.dataset.category);
+          document.querySelector("#recipes").scrollIntoView({ behavior: "smooth" });
+        });
+      });
+
+      searchInput.addEventListener("input", updateRecipes);
+
+      document.querySelectorAll(".save-button").forEach((button) => {
+        button.addEventListener("click", () => {
+          const saved = button.getAttribute("aria-pressed") !== "true";
+          button.setAttribute("aria-pressed", String(saved));
+          button.classList.toggle("saved", saved);
+        });
+      });
+    </script>
+  </body>
+</html>

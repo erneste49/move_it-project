@@ -1,0 +1,40 @@
+
+{% extends "partials/master.html" %}
+
+{% block title %}
+Login page
+{%endblock%}
+
+{% block style %}
+ <script src="https://cdn.tailwindcss.com"></script> <!--tailwind css -->
+<link href="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.css" rel="stylesheet" /> <!-- flowbit css -->
+<link rel="stylesheet" href="{{ url_for('user.static' , filename='css/style.css') }}" >
+{% endblock %}
+
+{% block maincontent%}
+<div class="login-container">
+    <!--loggin section -->
+    <main class="p-6 md:p-12 flex items-center">
+        <div class="max-w-md w-full mx-auto">
+        <a href="index.html" class="lg:hidden text-2xl font-black text-orange-500">move <span class="text-slate-900">it</span></a>
+        <div class="bg-white rounded-3xl shadow-sm border p-7 md:p-9 mt-8">
+            <div class="flex bg-slate-100 p-1 rounded-xl mb-7">
+            <a href="{{url_for('user.login')}}" id="loginTab" class="flex-1 py-2.5 text-center rounded-lg bg-white font-bold"> Login </a>
+            <a href="{{url_for('user.register_user')}}" id="registerTab" class="flex-1 py-2.5 text-center rounded-lg text-slate-500"> Register </a>
+            </div>
+            <div id="loginForm">
+            <h2 class="text-3xl font-black">Welcome back</h2>
+            <p class="text-slate-500 mt-2">Login to your account.</p>
+            <label class="block mt-6 text-sm font-bold">Email</label>
+            <input id="email" type="email" name="email" class="w-full mt-2 p-3 rounded-xl border" placeholder="you@example.com">
+            <label class="block mt-4 text-sm font-bold">Password</label>
+            <input id="password" type="password" name="pwd" class="w-full mt-2 p-3 rounded-xl border" placeholder="••••••••">
+            <button onclick="login()" class="w-full mt-6 bg-sky-500 text-white py-3 rounded-xl font-bold">Login</button>
+            <p id="loginMsg" class="text-sm mt-4 text-center"></p>
+            </div>
+        </div>
+        </div>
+    </main>
+
+</div>
+{% endblock %}

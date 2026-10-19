@@ -1,0 +1,14 @@
+
+
+{
+    "name" : "Kanye Smith",
+    "age" : 15,
+    "gender" : "male",
+    "is_married" : false,
+    "hobbies" : ["reading", "dancing", "eating", "Playing football" ],
+    "favourite_food" : {
+        "snacks": "Greek yoghurt Parfait",
+        "swallow": "Pounded yam",
+        "Drink" : "Fresh orange juice "
+    }
+}
