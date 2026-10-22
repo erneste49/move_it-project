@@ -224,18 +224,11 @@ def cancel_relocation(relocation_id):
         session.clear()
         return redirect(url_for('home.login'))
 
-    relocation = Relocation.query.filter_by(
-        id=relocation_id,
-        user_id=user.id,
-    ).first_or_404()
+    relocation = Relocation.query.filter_by( id=relocation_id, user_id=user.id,).first_or_404()
     has_pending_payment = any(payment.status == 'pending' for payment in relocation.payments)
     has_paid_payment = any(payment.status == 'paid' for payment in relocation.payments)
     if (
-        relocation.status != 'quoted'
-        or relocation.driver_id is None
-        or has_pending_payment
-        or has_paid_payment
-    ):
+        relocation.status != 'quoted' or relocation.driver_id is None or has_pending_payment or has_paid_payment ):
         flash('This request cannot be cancelled while payment is in progress or after its status changes.', 'error')
         return redirect(url_for('user.home', _anchor='relocations'))
 
@@ -277,8 +270,7 @@ def post_item():
             db.session.add(new_item)
             db.session.commit()
             return redirect(url_for('user.home'))
-        return redirect(url_for('user.post_item'))
-        
+        return redirect(url_for('user.post_item'))  
         
     return redirect(url_for("user.home"))
 
@@ -288,10 +280,7 @@ def update_product_status(item_id):
     if session.get('activeuser') is None:
         return redirect(url_for('home.login'))
 
-    product = Product.query.filter_by(
-        id=item_id,
-        seller_id=session.get('activeuser_id'),
-    ).first_or_404()
+    product = Product.query.filter_by(id=item_id, seller_id=session.get('activeuser_id'),).first_or_404()
     new_status = request.form.get('status')
     if new_status not in {'available', 'sold'}:
         return redirect(url_for('user.home'))
@@ -306,10 +295,7 @@ def edit_item(item_id):
     if session.get('activeuser') is None:
         return redirect(url_for('home.login'))
 
-    product = Product.query.filter_by(
-        id=item_id,
-        seller_id=session.get('activeuser_id'),
-    ).first_or_404()
+    product = Product.query.filter_by( id=item_id, seller_id=session.get('activeuser_id'),).first_or_404()
 
     if request.method == "POST":
         name = request.form.get('name', '').strip()
@@ -332,18 +318,9 @@ def edit_item(item_id):
             return redirect(url_for('user.edit_item', item_id=item_id))
 
         category = db.session.get(ProductCategory, category_id)
-        selected_lga = Localgovernment.query.filter_by(
-            lga_id=lga_id,
-            state_id=state_id,
-        ).first()
+        selected_lga = Localgovernment.query.filter_by( lga_id=lga_id, state_id=state_id, ).first()
         allowed_conditions = {'like_new', 'fairly_used', 'good', 'scratched', 'broken'}
-        if (
-            not price.is_finite()
-            or price < 0
-            or category is None
-            or selected_lga is None
-            or condition not in allowed_conditions
-        ):
+        if ( not price.is_finite() or price < 0 or category is None or selected_lga is None or condition not in allowed_conditions):
             return redirect(url_for('user.edit_item', item_id=item_id))
 
         product.name = name
@@ -356,12 +333,7 @@ def edit_item(item_id):
         db.session.commit()
         return redirect(url_for('user.home'))
 
-    return render_template(
-        "users/edit_product.html",
-        product=product,
-        categories=ProductCategory.query.order_by(ProductCategory.category).all(),
-        states=State.query.order_by(State.state_name).all(),
-    )
+    return render_template("users/edit_product.html", product=product, categories=ProductCategory.query.order_by(ProductCategory.category).all(), states=State.query.order_by(State.state_name).all(), )
 
 
 @user.post("/products/<int:item_id>/delete")
@@ -369,10 +341,7 @@ def delete_item(item_id):
     if session.get('activeuser') is None:
         return redirect(url_for('home.login'))
 
-    item_to_delete = Product.query.filter_by(
-        id=item_id,
-        seller_id=session.get('activeuser_id'),
-    ).first_or_404()
+    item_to_delete = Product.query.filter_by( id=item_id, seller_id=session.get('activeuser_id'), ).first_or_404()
     db.session.delete(item_to_delete)
     db.session.commit()
     return redirect(url_for('user.home'))
@@ -385,3 +354,4 @@ def view_single_product(product_id):
         return redirect(url_for('home.login'))
     product = Product.query.get_or_404(product_id) 
     return render_template("users/view_product_details.html", product=product ) 
+

@@ -4,10 +4,7 @@
 
 
 {% block actiontodo %}
-<form method="post" action="{{url_for('home.logout')}}" class="signup bg-orange-400 text-white border font-bold border-white hover:bg-white hover:text-orange-500 px-3 py-2 ">
-    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-    <button> Sign out </button>
-</form>
+
 {% endblock %}
 
 {% block maincontent %}
@@ -19,19 +16,21 @@
             <div class="flex flex-col items-center justify-center gap-4 p-4">
                
                 <img src="{{ url_for('user.static', filename='posted_items/' + product.image_name) }}" alt="{{ product.name }}" class="w-full max-w-md rounded-lg object-cover">
-                 <h1 class="text-2xl font-bold text-slate-800"> Product Name:  {{ product.name }} </h1>
-                 <p class="text-lg font-semibold text-orange-600"> Price: ₦{{ "{:,}".format(product.price) }} </p>
+                <h1 class="text-2xl font-bold text-slate-800"> Product Name:  {{ product.name }} </h1>
+                <p class="text-lg font-semibold text-orange-600"> Price: ₦{{ "{:,}".format(product.price) }} </p>
                 <p class="text-sm text-slate-500"> Posted on: {{ product.created_at }} </p>
                 <p class="text-sm text-slate-500"> Status: {{ product.status | title }} </p>
                 <p class="text-sm text-slate-500"> Category: {{ product.productcategory.category }} </p>
-                
+                <p class="text-sm text-slate-500"> Condition: {{ product.condition }} </p>
                 <p class="text-sm text-slate-500"> Location: {{ product.lga.lga_name }}, {{ product.state.state_name }} </p>
                 <p class="mt-4 text-sm text-slate-700"> Description: {{ product.description |title}} </p>
                 <p class="text-sm text-slate-500"> Seller: {{ product.user.first_name | title }} {{ product.user.last_name | title }} </p>
 
-                <a href="https://wa.me/{{ product.user.phone }}?text=Hi, I'm interested in {{ product.name }} on MoveIt" class="btn btn-success text-slate-500 border border-lime-300 px-3 py-1 hover:bg-lime-500 hover:text-white"> Chat Seller on WhatsApp </a>
+                <a href="https://wa.me/{{ product.user.phone }}?text=Hi, I'm interested in {{ product.name }} on MoveIt Please i need more information" class="btn btn-success text-slate-500 border border-lime-300 px-3 py-1 hover:bg-lime-500 hover:text-white"> Chat Seller on WhatsApp <i class='fa-brands fa-whatsapp'> </i> </a>
+
+                <a href="{{url_for('home.shop')}}" class="btn btn-primary bg-slate-800 text-slate-50 border px-3 py-1">Go Back to Shop</a>
             </div>
-            <a href="{{url_for('home.shop')}}" class="btn btn-primary">Go Back to Shop</a>
+            
         </div>
 
     </section>

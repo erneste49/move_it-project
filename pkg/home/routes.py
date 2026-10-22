@@ -204,3 +204,6 @@ def register_new():
     return render_template("users/register.html", states=states)
 
 
+@home.route("/sort/")
+def sort_category():
+    return 
