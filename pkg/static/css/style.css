@@ -45,10 +45,7 @@
     padding: 10px; 
     height: 300px;
 }
-.shop_box{
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    gap: 10px;
+
 }
 .reviews{
     margin:5px;

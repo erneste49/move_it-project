@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from flask import Blueprint, flash, render_template, request, redirect, url_for, session, jsonify
-from pkg.models import Product, User, State, Localgovernment, Relocation
+from pkg.models import Product, User, State, Localgovernment, Relocation, Contact 
 from pkg import db
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -19,10 +19,16 @@ def login():
         if email == None and password == None:
             return redirect(url_for('home.login'))
         user = User.query.filter_by(email=email).first()
-        if user and check_password_hash(user.hashed_password, password):
+        if user and check_password_hash(user.hashed_password, password) and user.status == 'active':
             session['activeuser'] = user.email
             session['activeuser_id'] = user.id
+            flash('Login successful!', 'success')
             return redirect(url_for('user.home'))
+        else:
+            if user and not check_password_hash(user.hashed_password, password):
+                flash('Invalid email or password. Please try again.', 'error')
+            else:
+                flash('Account has been suspended by Admin. Please contact Admin.', 'error')
         return redirect(url_for('home.login'))
 
     return render_template('/users/login.html')
@@ -84,20 +90,17 @@ def get_lga(state_id):
 @home.route("/")
 def home_page():
     all_products = Product.query.all()
-    if session.get('activeuser'):
+    if session.get('activeuser_id'):
         return render_template('home/home.html', products=all_products)
 
     return render_template("home/index.html", products=all_products)
 
 @home.route("/relocate/", methods=["GET", "POST"])
 def relocate():
-    if session.get('activeuser') is None:
-        return redirect(url_for('home.register_new'))
-
-    user = User.query.filter_by(email=session['activeuser']).first()
-    if user is None:
-        session.clear()
-        return redirect(url_for('home.login'))
+    if session.get('activeuser_id') is None:
+        return redirect(url_for('home.register_new_user'))
+    user_email = session.get('activeuser')
+    user = User.query.filter_by(email=user_email).first()
 
     if request.method == "POST":
         current_state_id = request.form.get('r_from_state', type=int)
@@ -109,26 +112,12 @@ def relocate():
         scheduled_date_value = request.form.get('r_date', '')
         items_and_properties = request.form.get('r_notes', '').strip()
 
-        if not all((
-            current_state_id,
-            current_lga_id,
-            new_state_id,
-            new_lga_id,
-            current_address,
-            new_address,
-            scheduled_date_value,
-        )):
+        if not all(( current_state_id, current_lga_id, new_state_id, new_lga_id, current_address, new_address, scheduled_date_value, )):
             flash('Please complete all required relocation details.', 'error')
             return redirect(url_for('home.relocate'))
 
-        current_lga = Localgovernment.query.filter_by(
-            lga_id=current_lga_id,
-            state_id=current_state_id,
-        ).first()
-        new_lga = Localgovernment.query.filter_by(
-            lga_id=new_lga_id,
-            state_id=new_state_id,
-        ).first()
+        current_lga = Localgovernment.query.filter_by( lga_id=current_lga_id, state_id=current_state_id, ).first()
+        new_lga = Localgovernment.query.filter_by( lga_id=new_lga_id, state_id=new_state_id,).first()
         if current_lga is None or new_lga is None:
             flash('Choose a local government that belongs to the selected state.', 'error')
             return redirect(url_for('home.relocate'))
@@ -139,17 +128,7 @@ def relocate():
             flash('Enter a valid preferred move date.', 'error')
             return redirect(url_for('home.relocate'))
 
-        relocation = Relocation(
-            user_id=user.id,
-            current_state_id=current_state_id,
-            current_lga_id=current_lga_id,
-            current_address=current_address,
-            new_state_id=new_state_id,
-            new_lga_id=new_lga_id,
-            new_address=new_address,
-            scheduled_date=scheduled_date,
-            items_and_properties=items_and_properties,
-        )
+        relocation = Relocation( user_id=user.id, current_state_id=current_state_id, current_lga_id=current_lga_id, current_address=current_address, new_state_id=new_state_id, new_lga_id=new_lga_id, new_address=new_address, scheduled_date=scheduled_date, items_and_properties=items_and_properties,)
         db.session.add(relocation)
         db.session.commit()
         flash('Your relocation request has been submitted.', 'success')
@@ -166,7 +145,7 @@ def shop():
 
 
 @home.route("/register_new/", methods=["GET", "POST"])
-def register_new():
+def register_new_user():
     states = State.query.all()
 
     if request.method == "POST":
@@ -182,7 +161,7 @@ def register_new():
 
         if fname == None or lname == None or email == None or phone == None or state == None or lga == None or address == None or user_password == None or confirm_pwd == None:
             return redirect(url_for('home.register_user'))
-
+        
         selected_lga = Localgovernment.query.filter_by(lga_id=lga, state_id=state).first()
         if selected_lga is None:
             return redirect(url_for('home.register_user'))
@@ -199,11 +178,29 @@ def register_new():
                         address=address, hashed_password=hashed_password, )
         db.session.add(new_user)
         db.session.commit()
+        session['activeuser'] = new_user.email
+        session['activeuser_id'] = new_user.id
         return redirect(url_for('home.relocate'))
 
-    return render_template("users/register.html", states=states)
+    return render_template("home/relocate_register.html", states=states)
 
 
-@home.route("/sort/")
-def sort_category():
-    return 
+@home.route("/contact_us/", methods=["GET", "POST"])
+def contact_us():
+    all_products = Product.query.all()
+    if request.method == "POST":
+        msg_email = request.form.get('contact_email')
+        msg_subject = request.form.get('contact_subject')
+        msg_message = request.form.get('contact_message')
+
+        if not msg_email or not msg_message:
+            flash('Please provide both your email and message.', 'error')
+            return redirect(url_for('home.contact_us'))
+        new_message = Contact(email=msg_email, subject=msg_subject, message=msg_message)
+        db.session.add(new_message)
+        db.session.commit()
+
+        flash('Thank you for reaching out! We will get back to you soon.', 'success')
+        return redirect(url_for('home.contact_us'))
+        
+    return render_template("home/home.html", products=all_products)

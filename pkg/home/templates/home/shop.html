@@ -21,7 +21,7 @@ MoveIt ShopNow
             </div>
         </section>
 
-        <div class="mx-auto max-w-6xl px-4 py-10">
+        <div class="mx-auto max-w-9xl px-4 py-10">
 
             <!-- category chips + sort -->
             <div class=" flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -36,9 +36,9 @@ MoveIt ShopNow
                 
             </div>
 
-            <div class="shop_box mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div class="shop_box mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
 
-                {% for p in products %}
+                {% for p in products | sort(attribute='created_at', reverse=True) %}
                 {% if p.status == "available" %} 
                 <article data-category={{p.productcategory.category}} class="s_box1 product-card group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
                     <div class="relative aspect-[4/3] bg-gradient-to-br from-sky-100 to-sky-200">
@@ -53,7 +53,7 @@ MoveIt ShopNow
 
                         <form method="post" action="{{url_for('user.view_single_product', product_id=p.id)}}"> 
                             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                            <button type="" class="mt-4 block rounded-lg bg-sky-950 px-5 py-2.5 text-center text-sm font-semibold text-white transition hover:bg-orange-500" > View Detail </button>
+                            <button type="" class="mt-4 block rounded-lg bg-sky-950 px-5 py-2.5 text-center text-sm font-semibold text-white transition hover:bg-orange-500" > View Product Details </button>
                         </form>
 
                     </div>

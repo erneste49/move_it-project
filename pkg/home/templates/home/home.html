@@ -78,7 +78,7 @@ MoveIt homepage
             <p class="mx-auto mt-3 max-w-xl text-center text-slate-200">Fresh listings from people near you.</p>
 
             <div class="shop_box mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                <!-- Each box is a listing slot; fill with your item loop -->
+             
                  {% for p in products[:3] %}
                 <div class="  rounded-2xl  shadow-sm">
 
@@ -163,24 +163,25 @@ MoveIt homepage
     </section>
 
     <!--Get in touch-->
-    <section class="contact_us bg-gradient-to-br from-sky-900 via-sky-800 to-sky-700 py-16">
+    <section id="contactUs" class="contact_us bg-gradient-to-br  from-sky-900 via-sky-800 to-sky-700 py-16">
         <div class="mx-auto grid max-w-5xl gap-10 px-4 lg:grid-cols-5">
             <div class="text-white lg:col-span-2">
                 <h2 class="text-3xl font-extrabold">Contact Us</h2>
                 <p class="mt-4 leading-8 text-sky-100">Got a question? Want to send feedback about our services? Need details about our business plan? Let us know and we will get back to you.</p>
             </div>
-            <form action="" method="" class="space-y-5 rounded-2xl bg-white p-6 shadow-xl sm:p-8 lg:col-span-3">
+            <form action="{{ url_for('home.contact_us') }}" method="post" class="space-y-5 rounded-2xl bg-white p-6 shadow-xl sm:p-8 lg:col-span-3">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <div>
                     <label for="email" class="mb-2 block text-sm font-semibold text-slate-800">Your email</label>
-                    <input type="email" name="c_email" id="email" class="block w-full rounded-lg border border-slate-300 bg-slate-50 p-3 text-sm focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-200" placeholder="enter your email" required>
+                    <input type="email" name="contact_email" id="email" class="block w-full rounded-lg border border-slate-300 bg-slate-50 p-3 text-sm focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-200" placeholder="enter your email" required>
                 </div>
                 <div>
                     <label for="subject" class="mb-2 block text-sm font-semibold text-slate-800">Subject</label>
-                    <input type="text" name="c_subject" id="subject" class="block w-full rounded-lg border border-slate-300 bg-slate-50 p-3 text-sm focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-200" placeholder="Let us know how we can help you" required>
+                    <input type="text" name="contact_subject" id="subject" class="block w-full rounded-lg border border-slate-300 bg-slate-50 p-3 text-sm focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-200" placeholder="Let us know how we can help you" required>
                 </div>
                 <div>
                     <label for="message" class="mb-2 block text-sm font-semibold text-slate-800">Your message</label>
-                    <textarea name="c_message" id="message" rows="5" class="block w-full rounded-lg border border-slate-300 bg-slate-50 p-3 text-sm focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-200" placeholder="Leave a comment..."></textarea>
+                    <textarea name="contact_message" id="message" rows="5" class="block w-full rounded-lg border border-slate-300 bg-slate-50 p-3 text-sm focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-200" placeholder="Leave a comment..."></textarea>
                 </div>
                 <button type="submit" class="w-full rounded-lg bg-orange-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-orange-600 focus:outline-none focus:ring-4 focus:ring-orange-200 sm:w-fit">Send message</button>
             </form>

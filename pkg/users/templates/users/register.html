@@ -21,8 +21,14 @@ Registration page
 
       <div class="bg-white rounded-3xl shadow-sm border p-7 md:p-9 mt-8">
         <div class="flex bg-slate-100 p-1 rounded-xl mb-7">
-          <a href="{{url_for('home.login')}}" id="loginTab" class="flex-1 py-2.5 text-center rounded-lg text-slate-500 ">Login</a>
-          <a href="{{url_for('home.register_user')}}" id="registerTab" class="flex-1 py-2.5 text-center rounded-lg bg-white font-bold ">Register</a>
+            <form method="post" action="{{url_for('home.login')}}" class="flex-1 py-2.5 text-center rounded-lg text-slate-500">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button id="loginTab" > Login </button>
+            </form>
+            <form method="post" action="{{url_for('home.register_user')}}" class="flex-1 py-2.5 text-center rounded-lg bg-white font-bold ">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button id="registerTab" > Register </button>
+            </form>
         </div>
         
         <div id="registerForm" class="phidden">
@@ -31,16 +37,16 @@ Registration page
             <form method="POST" action="{{url_for('home.register_user')}}">
               <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
               <label class="block mt-6 text-sm font-bold">First name</label>
-              <input id="name" class="w-full mt-2 p-3 rounded-xl border" name="first_name" placeholder="Enter your first name">
+              <input id="name" class="w-full mt-2 p-3 rounded-xl border" name="first_name"  required placeholder="Enter your first name">
 
               <label class="block mt-6 text-sm font-bold">Last name</label>
-              <input id="name" class="w-full mt-2 p-3 rounded-xl border" name="last_name" placeholder="Enter your last name">
+              <input id="name" class="w-full mt-2 p-3 rounded-xl border" name="last_name"  required placeholder="Enter your last name">
 
               <label class="block mt-4 text-sm font-bold">Email</label>
-              <input id="regEmail" type="email" class="w-full mt-2 p-3 rounded-xl border" name="email" placeholder="you@example.com">
+              <input id="regEmail" type="email" class="w-full mt-2 p-3 rounded-xl border" name="email" placeholder="you@example.com" required>
 
               <label class="block mt-6 text-sm font-bold">Phone Number </label>
-              <input id="phone" class="w-full mt-2 p-3 rounded-xl border" name="phone" placeholder="Phone Number ">
+              <input id="phone" class="w-full mt-2 p-3 rounded-xl border" name="phone" placeholder="Phone Number " required>
 
               <div class="location-select-fields">
               <label class="block mt-6 text-sm font-bold" for="state">State of residence</label>
@@ -58,20 +64,25 @@ Registration page
               </div>
 
               <label class="block mt-6 text-sm font-bold">Address, Closest landmark</label>
-              <input id="landmark" class="w-full mt-2 p-3 rounded-xl border" name="address" placeholder="Address">
+              <input id="landmark" class="w-full mt-2 p-3 rounded-xl border" required name="address" placeholder="Address">
 
               <label class="block mt-4 text-sm font-bold">Password</label>
-              <input id="regPassword" type="password" class="w-full mt-2 p-3 rounded-xl border" name="password" placeholder="Create a password">
+              <input id="regPassword" type="password" class="w-full mt-2 p-3 rounded-xl border" required name="password" placeholder="Create a password">
 
               <label class="block mt-4 text-sm font-bold">Confirm Password</label>
-              <input id="regPassword" type="password" class="w-full mt-2 p-3 rounded-xl border" name="confirm_pwd" placeholder="Create a password">
+              <input id="regPassword" type="password" class="w-full mt-2 p-3 rounded-xl border" required name="confirm_pwd" placeholder="Create a password">
             
 
               <button class="w-full mt-6 bg-orange-500 text-white py-3 rounded-xl font-bold"> Create account </button>
           </form>
           <p id="regMsg" class="text-sm mt-4 text-center"> </p>
 
-          <p class="text-sm mt-4 text-center">Already have an account? <a href="{{url_for('home.login')}}" class="font-bold text-sky-500">Login</a></p>
+          <p class="text-sm mt-4 text-center">Already have an account?
+            <form method="post" action="{{url_for('home.login')}}" class="flex-1 py-2.5 text-center rounded-lg text-slate-500">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button id="loginTab" class="font-bold text-sky-500" > Login </button>
+            </form> 
+          </p>
         </div>
       </div>
     </div>

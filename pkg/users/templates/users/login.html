@@ -22,15 +22,32 @@ Login page
 
             <div class="bg-white rounded-3xl shadow-sm border p-7 md:p-9 mt-8">
                 <div class="flex bg-slate-100 p-1 rounded-xl mb-7">
-                    <a href="{{url_for('home.login')}}" id="loginTab" class="flex-1 py-2.5 text-center rounded-lg bg-white font-bold"> Login </a>
-                    <a href="{{url_for('home.register_user')}}" id="registerTab" class="flex-1 py-2.5 text-center rounded-lg text-slate-500"> Register </a>
+                    <form method="post" action="{{url_for('home.login')}}" class="flex-1 py-2.5 text-center rounded-lg bg-white font-bold">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        <button id="loginTab" > Login </button>
+                    </form>
+                    <form method="post" action="{{url_for('home.register_user')}}" class="flex-1 py-2.5 text-center rounded-lg text-slate-500">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        <button id="registerTab" > Register </button>
+                    </form>
+                    
                 </div>
+                <div > 
+                    <form method="post" action="{{url_for('admin.login_admin')}}" class="flex-1 py-2.5 text-center rounded-lg text-slate-500 ">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        <button id="registerTab" > Login as an Admin </button>
+                    </form>
                 
                 <div id="loginForm">
                     <form action="" method="POST" >
                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                        <h2 class="text-3xl font-black">Welcome back</h2>
+                        <h2 class="text-3xl font-black">Welcome back User</h2>
                         <p class="text-slate-500 mt-2">Login to your account.</p>
+                         {% with messages = get_flashed_messages(with_categories=true) %}
+                            {% for category, message in messages %}
+                            <p role="status" class="mb-4 rounded-lg px-4 py-3 text-sm {{ 'bg-emerald-100 text-emerald-800' if category == 'success' else 'bg-rose-100 text-rose-800' }}">{{ message }}</p>
+                            {% endfor %}
+                         {% endwith %}
                         <label class="block mt-6 text-sm font-bold">Email</label>
                         <input id="email" type="email" name="email" class="w-full mt-2 p-3 rounded-xl border" placeholder="you@example.com">
                         <label class="block mt-4 text-sm font-bold">Password</label>
@@ -39,7 +56,12 @@ Login page
                         <p id="loginMsg" class="text-sm mt-4 text-center"></p>
                     </form>
                 </div>
-                <p class="text-sm mt-4 text-center">Don't have an account? <a href="{{url_for('home.register_user')}}" class="font-bold text-sky-500"> Register </a></p>
+                <p class="text-sm mt-4 text-center">Don't have an account?
+                    <form method="post" action="{{url_for('home.register_user')}}" class="flex-1 py-2.5 text-center rounded-lg text-slate-500">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        <button id="registerTab" class="font-bold text-sky-500"> Register </button>
+                    </form>    
+                </p>
             </div>
         </div>
     </main>

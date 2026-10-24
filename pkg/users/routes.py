@@ -1,5 +1,4 @@
 import secrets
-from datetime import datetime, timezone
 from decimal import Decimal, InvalidOperation
 
 from flask import Blueprint, current_app, flash, redirect, request, render_template, url_for, session
@@ -13,8 +12,10 @@ user = Blueprint('user', __name__, template_folder='templates', static_folder='s
 
 @user.route("/")
 def home():
-    if session.get('activeuser') == None:
+    if session.get('activeuser_id') == None:
         return redirect(url_for('home.login'))
+    if session.get('activeadmin') is not None:
+        return redirect(url_for('admin.admin_home'))
     categories = ProductCategory.query.all()
     all_states = State.query.all()
     al_lga = Localgovernment.query.all()
@@ -48,8 +49,8 @@ def pay_for_relocation():
         return redirect(url_for('user.home', _anchor='relocations'))
 
     relocation = Relocation.query.filter_by(id=relocation_id, user_id=user.id).first_or_404()
-    if relocation.status != 'quoted' or relocation.driver_id is None:
-        flash('Payment is available after a driver is assigned and your request is quoted.', 'error')
+    if relocation.driver_id is None or relocation.estimated_cost <= 0 or relocation.status == 'cancelled':
+        flash('Payment is available after a driver is assigned and a price is set.', 'error')
         return redirect(url_for('user.home', _anchor='relocations'))
 
     if any(payment.status == 'paid' for payment in relocation.payments):
@@ -78,12 +79,7 @@ def pay_for_relocation():
         flash('The relocation quote has an invalid amount. Please contact support.', 'error')
         return redirect(url_for('user.home', _anchor='relocations'))
 
-    payment = RelocationPayment(
-        relocation_id=relocation.id,
-        reference=secrets.token_hex(16),
-        amount_kobo=amount_kobo,
-        status='pending',
-    )
+    payment = RelocationPayment( relocation_id=relocation.id, reference=secrets.token_hex(16), amount_kobo=amount_kobo, status='pending', )
     db.session.add(payment)
     db.session.commit()
 
@@ -160,58 +156,13 @@ def verify_relocation_payment():
         return redirect(url_for('user.home', _anchor='relocations'))
 
     relocation = payment.relocation
-    if relocation.status != 'quoted' or relocation.driver_id is None:
+    if relocation.driver_id is None or relocation.estimated_cost <= 0 or relocation.status == 'cancelled':
         flash('This relocation is not ready for payment verification.', 'error')
         return redirect(url_for('user.home', _anchor='relocations'))
 
-    secret_key = current_app.config.get('PAYSTACK_SECRET_KEY')
-    if not secret_key:
-        current_app.logger.error('PAYSTACK_SECRET_KEY is not configured.')
-        flash('Payment verification is temporarily unavailable. Please contact support.', 'error')
-        return redirect(url_for('user.home', _anchor='relocations'))
-
-    try:
-        response = requests.get(
-            f'https://api.paystack.co/transaction/verify/{payment.reference}',
-            headers={'Authorization': f'Bearer {secret_key}'},
-            timeout=30,
-        )
-        response.raise_for_status()
-        result = response.json()
-    except (requests.RequestException, ValueError):
-        current_app.logger.exception('Paystack verification failed for reference %s.', payment.reference)
-        flash('We could not verify your payment yet. Please refresh your dashboard or contact support.', 'error')
-        return redirect(url_for('user.home', _anchor='relocations'))
-
-    if not isinstance(result, dict) or result.get('status') is not True:
-        flash('Paystack could not verify your payment. Please try again or contact support.', 'error')
-        return redirect(url_for('user.home', _anchor='relocations'))
-
-    data = result.get('data')
-    if not isinstance(data, dict):
-        data = {}
-    customer = data.get('customer')
-    customer_email = customer.get('email') if isinstance(customer, dict) else None
-    if (
-        data.get('status') != 'success'
-        or data.get('reference') != payment.reference
-        or data.get('amount') != payment.amount_kobo
-        or data.get('currency') != 'NGN'
-        or not isinstance(customer_email, str)
-        or customer_email.lower() != user.email.lower()
-        or payment.amount_kobo != int(Decimal(relocation.estimated_cost) * 100)
-    ):
-        payment.status = 'failed'
-        db.session.commit()
-        flash('Payment was not successful or could not be matched to this relocation.', 'error')
-        return redirect(url_for('user.home', _anchor='relocations'))
-
-    payment.status = 'paid'
-    payment.paid_at = datetime.now(timezone.utc).replace(tzinfo=None)
-    relocation.status = 'confirmed'
-    db.session.commit()
-    flash('Payment confirmed. Your relocation is confirmed.', 'success')
+    flash('Your payment is awaiting confirmation by our admin team.', 'success')
     return redirect(url_for('user.home', _anchor='relocations'))
+
 
 
 @user.post('/relocations/<int:relocation_id>/cancel')
@@ -348,10 +299,9 @@ def delete_item(item_id):
 
 
 
-@user.post("/post/<int:product_id>") 
+@user.post("/view/product/<int:product_id>") 
 def view_single_product(product_id):
-    if session.get('activeuser') is None:
+    if session.get('activeuser_id') is None:
         return redirect(url_for('home.login'))
     product = Product.query.get_or_404(product_id) 
     return render_template("users/view_product_details.html", product=product ) 
-

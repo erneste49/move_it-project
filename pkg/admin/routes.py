@@ -1,9 +1,10 @@
 from decimal import Decimal, InvalidOperation
+from datetime import datetime, timezone
 
 from flask import Blueprint, flash, redirect, request, render_template, url_for, session
 from jinja2.ext import do
 from pkg import db
-from pkg.models import User, Admin, Localgovernment, State, ProductCategory, Product, Driver, Relocation
+from pkg.models import User, Admin, Localgovernment, State, ProductCategory, Product, Driver, Relocation, RelocationPayment
 from werkzeug.security import generate_password_hash, check_password_hash
 
 admin = Blueprint('admin', __name__, template_folder='templates', static_folder='static', url_prefix="/admin")
@@ -19,15 +20,7 @@ def admin_home():
     all_drivers = Driver.query.all()
     relocations = Relocation.query.order_by(Relocation.created_at.desc()).all()
 
-    return render_template(
-        "/users/admin.html",
-        states=all_states,
-        lgas=all_lgas,
-        users=all_users,
-        products=all_products,
-        drivers=all_drivers,
-        relocations=relocations,
-    )
+    return render_template( "/users/admin.html", states=all_states, lgas=all_lgas, users=all_users, products=all_products, drivers=all_drivers, relocations=relocations,)
 
 
 @admin.route("/relocations/<int:relocation_id>/manage/", methods=["GET", "POST"])
@@ -100,6 +93,42 @@ def manage_relocation(relocation_id):
         statuses=statuses,
     )
 
+
+@admin.post("/relocations/<int:relocation_id>/payments/<int:payment_id>/status")
+def update_relocation_payment_status(relocation_id, payment_id):
+    if session.get('activeadmin') is None:
+        return redirect(url_for('admin.login_admin'))
+
+    relocation = Relocation.query.get_or_404(relocation_id)
+    payment = RelocationPayment.query.filter_by(
+        id=payment_id,
+        relocation_id=relocation.id,
+    ).first_or_404()
+    new_status = request.form.get('status', '')
+
+    if new_status not in {'paid', 'failed'}:
+        flash('Choose a valid payment status.', 'error')
+        return redirect(url_for('admin.manage_relocation', relocation_id=relocation.id))
+    if payment.status == 'paid' and new_status != 'paid':
+        flash('A confirmed payment cannot be changed.', 'error')
+        return redirect(url_for('admin.manage_relocation', relocation_id=relocation.id))
+    if new_status == 'paid':
+        expected_amount = int(Decimal(relocation.estimated_cost) * 100)
+        if (
+            relocation.driver_id is None
+            or relocation.status == 'cancelled'
+        ):
+            flash('The relocation request has been cancelled.', 'error')
+            return redirect(url_for('admin.manage_relocation', relocation_id=relocation.id))
+        payment.paid_at = datetime.now(timezone.utc).replace(tzinfo=None)
+        relocation.status = 'confirmed'
+
+    payment.status = new_status
+    db.session.commit()
+    flash('Payment status updated.', 'success')
+    return redirect(url_for('admin.manage_relocation', relocation_id=relocation.id))
+
+
 @admin.route("/ctrl/register/new/admin/", methods=["GET", "POST"])
 def register_admin():
     if request.method == "POST":
@@ -132,26 +161,45 @@ def login_admin():
         if admin:
             if check_password_hash(admin.password, password):
                 session['activeadmin'] = admin.email
+                session['activeuser_id'] = admin.id
                 return redirect(url_for("admin.admin_home"))
             return redirect(url_for("admin.login_admin"))
         return redirect(url_for("admin.login_admin"))
     return render_template("/admin/login.html")
+
+@admin.post("/user/<int:user_id>/status")
+def update_user_status(user_id):
+    if session.get('activeadmin') is None:
+        return redirect(url_for('admin.login_admin'))
+
+    user = User.query.get(user_id)
+    if not user:
+        return redirect(url_for('admin.admin_home'))
+
+    new_status = request.form.get('status')
+    if new_status not in {'active', 'inactive', 'blocked'}:
+        return redirect(url_for('admin.admin_home'))
+
+    user.status = new_status
+    db.session.commit()
+    return redirect(url_for('admin.admin_home'))
 
 
 
 
 @admin.route("/add/category/")
 def add_category():
-    # cat1 = ProductCategory(category='Furniture')
-    # cat2 = ProductCategory(category='Electronics')
-    # cat3 = ProductCategory(category='Appliances')
-    # cat4 = ProductCategory(category='Kitchen')
-    # cat5 = ProductCategory(category='Decor')
+    cat1 = ProductCategory(category='Furniture')
+    cat2 = ProductCategory(category='Electronics')
+    cat3 = ProductCategory(category='Appliances')
+    cat4 = ProductCategory(category='Kitchen')
+    cat5 = ProductCategory(category='Decor')
     cat6 = ProductCategory(category='Others')
-    # db.session.add(cat1)
-    # db.session.add(cat2)
-    # db.session.add(cat3)
-    # db.session.add(cat4)
+    db.session.add(cat1)
+    db.session.add(cat2)
+    db.session.add(cat3)
+    db.session.add(cat4)
+    db.session.add(cat5)
     db.session.add(cat6)
     db.session.commit()
     return redirect(url_for('admin.admin_home'))
@@ -218,11 +266,25 @@ def delete_driver(id):
 
 
 
+@admin.post("/product/<int:product_id>/delete")
+def delete_product(product_id):
+    if session.get('activeadmin') is None:
+        return redirect(url_for('admin.admin_login'))
+
+    item_to_delete = Product.query.filter_by( id=product_id ).first_or_404()
+    db.session.delete(item_to_delete)
+    db.session.commit() 
+    return redirect(url_for('user.home'))
 
 
-
-
-
-
+@admin.route("/delete_user/<int:id>", methods=["POST"])
+def delete_user(id):
+    user = User.query.get_or_404(id)
+    try:
+        db.session.delete(user)
+        db.session.commit()
+    except Exception as error:
+        db.session.rollback()
+    return redirect(url_for('admin.admin_home'))
 
 

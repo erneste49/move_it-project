@@ -1,5 +1,8 @@
 
 from datetime import datetime
+
+from sqlalchemy.orm import backref
+
 from pkg import db
 
 
@@ -104,12 +107,7 @@ class RelocationPayment(db.Model):
     __tablename__ = 'relocation_payments'
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    relocation_id = db.Column(
-        db.Integer,
-        db.ForeignKey(Relocation.id, ondelete='CASCADE'),
-        nullable=False,
-        index=True,
-    )
+    relocation_id = db.Column( db.Integer,db.ForeignKey(Relocation.id, ondelete='CASCADE'), nullable=False, index=True, )
     reference = db.Column(db.String(100), nullable=False, unique=True)
     amount_kobo = db.Column(db.Integer, nullable=False)
     status = db.Column(db.Enum('pending', 'paid', 'failed'), default='pending', nullable=False)
@@ -157,4 +155,16 @@ class Admin(db.Model):
     phone = db.Column(db.String(100), nullable=False )
     password = db.Column(db.String(255), nullable=False )
 
+
+class Contact(db.Model):
+    __tablename__ = 'contact'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    email = db.Column(db.String(255), nullable=False )
+    subject = db.Column(db.String(255), nullable=False )
+    message = db.Column(db.Text, nullable=False )
+    user_id = db.Column(db.Integer, db.ForeignKey(User.id)  )
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+
+    messg_sender = db.relationship (User, backref='contact' )
 
