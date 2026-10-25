@@ -158,11 +158,17 @@ MoveIt homepage
     </section>
 
     <!--Get in touch-->
-    <section class="contact_us bg-gradient-to-br from-sky-900 via-sky-800 to-sky-700 py-16">
+    <section id="contactUs" class="contact_us bg-gradient-to-br from-sky-900 via-sky-800 to-sky-700 py-16">
         <div class="mx-auto grid max-w-5xl gap-10 px-4 lg:grid-cols-5">
             <div class="text-white lg:col-span-2">
                 <h2 class="text-3xl font-extrabold">Contact Us</h2>
                 <p class="mt-4 leading-8 text-sky-100">Got a question? Want to send feedback about our services? Need details about our business plan? Let us know and we will get back to you.</p>
+
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% for category, message in messages %}
+                    <p role="status" class="mb-4 rounded-lg px-4 py-3 text-sm {{ 'bg-emerald-100 text-emerald-800' if category == 'success' else 'bg-rose-100 text-rose-800' }}">{{ message }}</p>
+                    {% endfor %}
+                {% endwith %}
             </div>
 
             <form action="{{ url_for('home.contact_us') }}" method="post" class="space-y-5 rounded-2xl bg-white p-6 shadow-xl sm:p-8 lg:col-span-3">
@@ -184,3 +190,4 @@ MoveIt homepage
         </div>
     </section>
 {% endblock %}
+

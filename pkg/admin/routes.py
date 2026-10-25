@@ -4,7 +4,7 @@ from datetime import datetime, timezone
 from flask import Blueprint, flash, redirect, request, render_template, url_for, session
 from jinja2.ext import do
 from pkg import db
-from pkg.models import User, Admin, Localgovernment, State, ProductCategory, Product, Driver, Relocation, RelocationPayment
+from pkg.models import User, Admin, Localgovernment, State, ProductCategory, Product, Driver, Relocation, RelocationPayment , Contact 
 from werkzeug.security import generate_password_hash, check_password_hash
 
 admin = Blueprint('admin', __name__, template_folder='templates', static_folder='static', url_prefix="/admin")
@@ -19,8 +19,9 @@ def admin_home():
     all_products = Product.query.all()
     all_drivers = Driver.query.all()
     relocations = Relocation.query.order_by(Relocation.created_at.desc()).all()
+    all_messages = Contact.query.order_by(Contact.created_at.desc()).all()
 
-    return render_template( "/users/admin.html", states=all_states, lgas=all_lgas, users=all_users, products=all_products, drivers=all_drivers, relocations=relocations,)
+    return render_template( "/users/admin.html", states=all_states, lgas=all_lgas, users=all_users, products=all_products, drivers=all_drivers, relocations=relocations, senders=all_messages)
 
 
 @admin.route("/relocations/<int:relocation_id>/manage/", methods=["GET", "POST"])
@@ -288,3 +289,12 @@ def delete_user(id):
     return redirect(url_for('admin.admin_home'))
 
 
+@admin.route("/delete_message/<int:id>", methods=["POST"])
+def delete_message(id):
+    message = Contact.query.get_or_404(id)
+    try:
+        db.session.delete(message)
+        db.session.commit()
+    except Exception as error:
+        db.session.rollback()
+    return redirect(url_for('admin.admin_home'))

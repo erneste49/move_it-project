@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from flask import Blueprint, flash, render_template, request, redirect, url_for, session, jsonify
-from pkg.models import Product, User, State, Localgovernment, Relocation, Contact 
+from pkg.models import Product, User, State, Localgovernment, Relocation, Contact , ProductCategory
 from pkg import db
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -140,7 +140,9 @@ def relocate():
 
 @home.route("/shop/")
 def shop():
+    search_word = request.args.get('q', '').strip()
     all_products = Product.query.all()
+    searchedProducts = Product.query.filter( (Product.name.contains(search_word)) | (Product.description.contains(search_word)) | ProductCategory.category.contains(search_word) ).all() 
     return render_template('home/shop.html', products=all_products )
 
 
@@ -187,20 +189,52 @@ def register_new_user():
 
 @home.route("/contact_us/", methods=["GET", "POST"])
 def contact_us():
-    all_products = Product.query.all()
-    if request.method == "POST":
-        msg_email = request.form.get('contact_email')
-        msg_subject = request.form.get('contact_subject')
-        msg_message = request.form.get('contact_message')
+    if session.get('activeuser_id') or session.get('activuser_id') or session.get('activeuser_id') is None:
+        all_products = Product.query.all()
+        if request.method == "POST":
+            msg_email = request.form.get('contact_email')
+            msg_subject = request.form.get('contact_subject')
+            msg_message = request.form.get('contact_message')
 
-        if not msg_email or not msg_message:
-            flash('Please provide both your email and message.', 'error')
-            return redirect(url_for('home.contact_us'))
-        new_message = Contact(email=msg_email, subject=msg_subject, message=msg_message)
-        db.session.add(new_message)
-        db.session.commit()
+            if not msg_email or not msg_message:
+                flash('Please provide both your email and message.', 'error')
+                return redirect(url_for('home.contact_us'))
+            new_message = Contact(email=msg_email, subject=msg_subject, message=msg_message)
+            db.session.add(new_message)
+            db.session.commit()
 
-        flash('Thank you for reaching out! We will get back to you soon.', 'success')
-        return redirect(url_for('home.contact_us'))
+            flash('Thank you for reaching out! A member of our team will get in touch with you soon.', 'success')
+            return redirect(url_for("home.home_page",  _anchor="contactUs"))
         
-    return render_template("home/home.html", products=all_products)
+    return redirect (url_for("home.home_page",  _anchor="contactUs"))
+
+
+@home.route("/search/")
+def search_word():
+    search_word = request.args.get('q', '').strip() 
+    if search_word:
+        flash(f'Results found for "{search_word}".', 'success')
+        searchedProducts = Product.query.filter( (Product.name.contains(search_word)) | (ProductCategory.category.contains(search_word)) | (Product.description.contains(search_word)) ).all()
+    elif search_word == "":
+        flash('Please enter a search word.', 'error')
+        return redirect(url_for('home.shop'))
+    else:
+        searchedProducts = []  
+    return render_template("home/shop.html", products=searchedProducts, search_word=search_word)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

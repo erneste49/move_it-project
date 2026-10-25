@@ -17,13 +17,33 @@ MoveIt ShopNow
             <div class="relative mx-auto max-w-6xl px-4 py-14 text-center">
                 <h1 class="text-4xl font-extrabold tracking-tight sm:text-5xl">Shop Now</h1>
                 <p class="mx-auto mt-4 max-w-xl text-lg text-sky-100">Quality household items from people moving near you. Find a deal and negotiate with the seller.</p>
-               
+
+                <form action="{{ url_for('home.search_word') }}" method="get" class="mx-auto mt-8 flex max-w-2xl flex-col gap-3 sm:flex-row">
+                    <input type="search" name="q" placeholder="Search for sofas, TVs, fridges..." class="w-full rounded-xl border-0 p-3.5 text-slate-800 focus:outline-none focus:ring-4 focus:ring-orange-300">
+                    <button type="submit" class="rounded-xl bg-orange-500 px-8 py-3.5 font-bold text-white transition hover:bg-orange-600">Search</button>
+                </form>
+            
             </div>
+            
         </section>
+        <div> 
+                {% if searchedProducts%}
+                <p> {{ searchedProducts|length }} products found </p>
+                <div>
+                    {%for item in searchedProducts%}
+                    <div> <p> {{item.name}} - {{item.price}} </p> </div>
+                    {%endfor%}
+                </div>
+                {%endif%}
+            </div>
 
         <div class="mx-auto max-w-9xl px-4 py-10">
-
-            <!-- category chips + sort -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% for category, message in messages %}
+                <p role="status" class="mb-4 rounded-lg px-4 py-3 text-sm {{ 'bg-emerald-100 text-emerald-800' if category == 'success' else 'bg-rose-100 text-rose-800' }}">{{ message }}</p>
+                {% endfor %}
+            {% endwith %} 
+            <!-- category sort button -->
             <div class=" flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <div class="filter-btns flex gap-2 overflow-x-auto pb-1">
                     <button data-filter="All" class=" filter-btn active  whitespace-nowrap rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:border-orange-500 hover:text-orange-600">All</button>
@@ -61,7 +81,7 @@ MoveIt ShopNow
                 {% endif %}
                 {% endfor %}
 
-                <!-- post-your-own prompt -->
+                <!-- post-your-own product -->
                 <div class="flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-orange-300 bg-orange-50 p-8 text-center">
                     <h3 class="text-lg font-bold text-sky-950">Have something to sell?</h3>
                     <p class="mt-2 text-sm text-slate-600">Post your item and reach buyers who are moving in.</p>
@@ -73,6 +93,10 @@ MoveIt ShopNow
         </div>
     </div>
 {% endblock %}
+
+{%block footerAction %} {{url_for('home.shop')}} {% endblock %}
+
+
 
 {%block jsscript%}
 <script src="{{ url_for('static', filename='js/shop.js' ) }}">  </script>

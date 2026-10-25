@@ -124,6 +124,8 @@ Relocation page
 </div>
 {% endblock %}
 
+{%block footerAction %} {{url_for('home.relocate')}} {% endblock %}
+
 {%block jsscript%}
 <script src="{{ url_for('static', filename='js/script.js' ) }}">  </script>
 {%endblock%}

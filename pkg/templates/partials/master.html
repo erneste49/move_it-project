@@ -17,18 +17,25 @@
 <div>
 
     <!-- Navbar -->
-    <div class="navbar">
+    <div class="navbar" id="Top">
         <nav class="bg-violet-50 text-orange-500 fixed z-50 w-full z-20 top-0 start-0 border-b border-default">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="{{url_for('home.home_page')}}" class="flex items-center space-x-3 rtl:space-x-reverse">
             <img src="{{ url_for('static', filename='images/moveit-logo.png') }}" alt="MoveIt logo" class="h-10 w-auto">
-        </a>
+        </a>                   
         <div class="inline-flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-           {% block actiontodo %}
-            <form method="" action="{{url_for('home.register_user')}}" class="signup bg-orange-400 text-white border font-bold border-white hover:bg-white hover:text-orange-500 px-3 py-2 ">
-                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                <button> Sign up </button>
-            </form>
+           {% block actiontodo %} 
+            {% if session.get('activeuser_id') == None %}
+                <form method="" action="{{url_for('home.register_user')}}" class="signup bg-orange-400 text-white border font-bold border-white hover:bg-white hover:text-orange-500 px-3 py-2 ">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button> Sign up </button>
+                </form>
+                {% elif session.get('activeuser_id') %}
+                <form method="post" action="{{url_for('home.logout')}}" class="signup bg-orange-400 text-white border font-bold border-white hover:bg-white hover:text-orange-500 px-3 py-2 ">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button> Sign out </button>
+                </form>
+                {% endif %}
             {% endblock %}
             <button data-collapse-toggle="navbar-cta" type="button" class="inline-flex items-center p-2 w-9 h-9 justify-center text-sm text-body rounded-base md:hidden  hover:bg-neutral-secondary-soft hover:text-heading focus:outline-none focus:ring-2 focus:ring-neutral-tertiary" aria-controls="navbar-cta" aria-expanded="false">
                 <span class="sr-only">Open main menu</span>
@@ -37,18 +44,37 @@
         </div>
         <div class="items-center justify-between bg-white md:bg-transparent hidden w-full md:flex md:w-auto md:order-1" id="navbar-cta">
             {% block navlinks %}
-            <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-default rounded-base bg-neutral-secondary-soft md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-neutral-primary">
+            <ul class=" font-medium flex flex-col p-4 md:p-0 mt-4 border border-default rounded-base bg-neutral-secondary-soft md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-neutral-primary" >
             <li>
-                <a href="{{url_for('home.home_page')}}" class="block py-2 px-3 text-sky-950 md:text-xl md:font-bold hover:text-orange-500 hover:text-3xl transition-1500 bg-brand rounded md:bg-transparent md:text-fg-brand md:p-0" aria-current="page">Home</a>
+                <a href="{{url_for('home.home_page')}}" class=" {% if request.endpoint == 'home.home_page' %}  block py-2 px-3 text-orange-500 md:text-xl md:font-bold hover:text-orange-500 hover:text-3xl transition-1500 bg-brand rounded md:bg-transparent md:text-fg-brand md:p-0 aria-current='page' {%else %} text-sky-950 md:text-xl md:font-bold hover:text-orange-500 hover:text-3xl transition-1500 bg-brand rounded md:bg-transparent md:text-fg-brand {%endif%} ">Home</a> 
             </li>
             <li>
-                <a href="{{url_for('home.relocate')}}" class="block py-2 px-3 text-sky-950 md:text-xl md:font-bold hover:text-orange-500  hover:text-3xl text-heading rounded   md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">Relocate</a>
+                {% if session.get('activeuser') %}
+                <a href="{{url_for('home.relocate')}}" class=" {% if request.endpoint == 'home.relocate' %}  block py-2 px-3 text-orange-500 md:text-xl md:font-bold hover:text-orange-500 hover:text-3xl transition-1500 bg-brand rounded md:bg-transparent md:text-fg-brand md:p-0 aria-current='page' {%else %} text-sky-950 md:text-xl md:font-bold hover:text-orange-500 hover:text-3xl transition-1500 bg-brand rounded md:bg-transparent md:text-fg-brand {%endif%}"> Relocate </a>
+                {% elif session.get('activeadmin')  %}
+                <a href="{{url_for('home.relocate')}}" class=" {% if request.endpoint == 'home.relocate' %}  block py-2 px-3 text-orange-500 md:text-xl md:font-bold hover:text-orange-500 hover:text-3xl transition-1500 bg-brand rounded md:bg-transparent md:text-fg-brand md:p-0 aria-current='page' {%else %} text-sky-950 md:text-xl md:font-bold hover:text-orange-500 hover:text-3xl transition-1500 bg-brand rounded md:bg-transparent md:text-fg-brand {%endif%}">Relocation Page </a>
+                 {% else %}
+                 <a href="{{url_for('home.relocate')}}" class=" {% if request.endpoint == 'home.relocate' %}  block py-2 px-3 text-orange-500 md:text-xl md:font-bold hover:text-orange-500 hover:text-3xl transition-1500 bg-brand rounded md:bg-transparent md:text-fg-brand md:p-0 aria-current='page' {%else %} text-sky-950 md:text-xl md:font-bold hover:text-orange-500 hover:text-3xl transition-1500 bg-brand rounded md:bg-transparent md:text-fg-brand {%endif%}">Relocate</a>
+                {%endif %} 
             </li>
             <li>
-                <a href="{{url_for('home.shop')}}" class="block py-2 px-3 text-sky-950 md:text-xl md:font-bold  hover:text-orange-500 hover:text-3xl text-heading rounded md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">Shop Now</a>
+                {% if session.get('activeuser') %}
+                <a href="{{url_for('home.shop')}}" class=" {% if request.endpoint == 'home.shop' %}  block py-2 px-3 text-orange-500 md:text-xl md:font-bold hover:text-orange-500 hover:text-3xl transition-1500 bg-brand rounded md:bg-transparent md:text-fg-brand md:p-0 aria-current='page' {%else %} text-sky-950 md:text-xl md:font-bold hover:text-orange-500 hover:text-3xl transition-1500 bg-brand rounded md:bg-transparent md:text-fg-brand {%endif%}">Shop Now</a>
+                {% elif session.get('activeadmin')  %}
+                <a href="{{url_for('home.shop')}}" class=" {% if request.endpoint == 'home.shop' %}  block py-2 px-3 text-orange-500 md:text-xl md:font-bold hover:text-orange-500 hover:text-3xl transition-1500 bg-brand rounded md:bg-transparent md:text-fg-brand md:p-0 aria-current='page' {%else %} text-sky-950 md:text-xl md:font-bold hover:text-orange-500 hover:text-3xl transition-1500 bg-brand rounded md:bg-transparent md:text-fg-brand {%endif%}">Shop Page </a>
+                {% else  %}
+                <a href="{{url_for('home.shop')}}" class=" {% if request.endpoint == 'home.shop' %}  block py-2 px-3 text-orange-500 md:text-xl md:font-bold hover:text-orange-500 hover:text-3xl transition-1500 bg-brand rounded md:bg-transparent md:text-fg-brand md:p-0 aria-current='page' {%else %} text-sky-950 md:text-xl md:font-bold hover:text-orange-500 hover:text-3xl transition-1500 bg-brand rounded md:bg-transparent md:text-fg-brand {%endif%}">Shop Now</a>
+                {%endif %}
             </li>
             <li>
-                <a href=" {{url_for('user.home')}} " class="block py-2 px-3 text-sky-950 md:text-xl md:font-bold  hover:text-orange-500 hover:text-3xl text-heading rounded   md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">Sell Items</a>
+               
+                {% if session.get('activeuser') %}
+                <a href=" {{url_for('user.home')}} " class=" {% if request.endpoint == 'user.home' %}  block py-2 px-3 text-orange-500 md:text-xl md:font-bold hover:text-orange-500 hover:text-3xl transition-1500 bg-brand rounded md:bg-transparent md:text-fg-brand md:p-0 aria-current='page' {%else %} text-sky-950 md:text-xl md:font-bold hover:text-orange-500 hover:text-3xl transition-1500 bg-brand rounded md:bg-transparent md:text-fg-brand {%endif%}">Post an Item </a>
+                {% elif session.get('activeadmin')  %}
+                <a href=" {{url_for('user.home')}} " class=" {% if request.endpoint == 'user.home' %}  block py-2 px-3 text-orange-500 md:text-xl md:font-bold hover:text-orange-500 hover:text-3xl transition-1500 bg-brand rounded md:bg-transparent md:text-fg-brand md:p-0 aria-current='page' {%else %} text-sky-950 md:text-xl md:font-bold hover:text-orange-500 hover:text-3xl transition-1500 bg-brand rounded md:bg-transparent md:text-fg-brand {%endif%}">Dashboard</a>
+                 {% else %}
+                <a href=" {{url_for('user.home')}} " class=" {% if request.endpoint == 'user.home' %}  block py-2 px-3 text-orange-500 md:text-xl md:font-bold hover:text-orange-500 hover:text-3xl transition-1500 bg-brand rounded md:bg-transparent md:text-fg-brand md:p-0 aria-current='page' {%else %} text-sky-950 md:text-xl md:font-bold hover:text-orange-500 hover:text-3xl transition-1500 bg-brand rounded md:bg-transparent md:text-fg-brand {%endif%}">Sell an Item</a>
+                {%endif %}
             </li>
             </ul>
             {% endblock %}
@@ -60,6 +86,11 @@
     {% block maincontent %}
         
     {% endblock %}
+
+
+    
+    <a href="{% block footerAction %}  {%endblock%}" class="block py-2 px-3 text-center text-sky-950 md:text-xl md:font-bold hover:text-orange-500 hover:text-3xl transition-1500 bg-brand rounded md:bg-transparent md:text-fg-brand md:p-0" aria-current='page'> Go to Top </a>
+    
 
     <!--footer-->
     <div class="footer bg-sky-950  text-white">
